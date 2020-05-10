@@ -1,0 +1,20 @@
+.umi-alignment-table, .umi-alignment-cell {
+  border-style: solid;
+  border-width: thin;
+}
+
+.umi-ok {
+  border-color: green;
+}
+
+.umi-nok {
+  border-color: red;
+}
+
+.umi-alignment-row.umi-ok::after {
+    content: '✅';
+}
+
+.umi-alignment-row.umi-nok::after {
+    content: '❎';
+}
