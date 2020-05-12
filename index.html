@@ -53,6 +53,12 @@
     <a class="current" href=".">Home</a>
     <ul class="subnav">
             
+    <li class="toctree-l2"><a href="#ejercicio-1">Ejercicio 1</a></li>
+    
+
+    <li class="toctree-l2"><a href="#ejercicio-2">Ejercicio 2</a></li>
+    
+
     </ul>
 	    </li>
           
@@ -95,10 +101,10 @@
 
 <p><link rel="stylesheet" type="text/css" href="css/alignment.css">
 <script src="js/alignment.js"></script></p>
+<h2 id="ejercicio-1">Ejercicio 1</h2>
 <blockquote>
-  Consigna: Alineá "BANANA" y "MANZANA"
+<p>Consigna: Alineá "BANANA" y "MANZANA"</p>
 </blockquote>
-
 <table class="umi-alignment-table" >
   <tr class="umi-alignment-row"  data-align-expected="-BAN-ANA">
       <td class="umi-alignment-cell"></td>
@@ -132,8 +138,37 @@
   </tr>
 </table>
 
+<h2 id="ejercicio-2">Ejercicio 2</h2>
+<blockquote>
+<p>Consigna: Alineá "ANA" y "ANANA"</p>
+</blockquote>
+<table class="umi-alignment-table" >
+  <tr class="umi-alignment-row"  data-align-expected="--ANA">
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+  </tr>
+  <tr class="umi-alignment-row" data-align-expected="ANANA">
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+  </tr>
+  <tr class="umi-alignment-results">
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+  </tr>
+</table>
+
 <script>
-  sampleTable = new AlignmentTable($(".umi-alignment-table"));
+  new AlignmentTable($(".umi-alignment-table")[0]);
+  new AlignmentTable($(".umi-alignment-table")[1]);
 </script>
               
             </div>
@@ -178,5 +213,5 @@
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2020-05-11 03:23:25
+Build Date UTC : 2020-05-12 21:53:16
 -->
