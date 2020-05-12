@@ -67,8 +67,37 @@
   </tr>
 </table>
 
+## Ejercicio 3
+
+>  Consigna: Alineá "ANA" y "ANANA"
+
+<table class="umi-alignment-table" >
+  <tr class="umi-alignment-row"  data-align-expected="--ANA" data-align-initial="A-N-A">
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+  </tr>
+  <tr class="umi-alignment-row" data-align-expected="ANANA" data-align-initial="ANANA">
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+  </tr>
+  <tr class="umi-alignment-results">
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+  </tr>
+</table>
+
 <script>
   new AlignmentTable($($(".umi-alignment-table")[0]));
   new AlignmentTable($($(".umi-alignment-table")[1]));
+  new AlignmentTable($($(".umi-alignment-table")[2]));
 </script>
 
