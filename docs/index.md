@@ -79,7 +79,7 @@
       <td class="umi-alignment-cell"></td>
       <td class="umi-alignment-cell"></td>
   </tr>
-  <tr class="umi-alignment-row" data-align-expected="ANANA" data-align-initial="ANANA">
+  <tr class="umi-alignment-row" data-align-expected="ANANA" data-align-initial="-">
       <td class="umi-alignment-cell"></td>
       <td class="umi-alignment-cell"></td>
       <td class="umi-alignment-cell"></td>
