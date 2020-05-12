@@ -2,9 +2,9 @@
 <link rel="stylesheet" type="text/css" href="css/alignment.css">
 <script src="js/alignment.js"></script>
 
-<blockquote>
-  Consigna: Alineá "BANANA" y "MANZANA"
-</blockquote>
+## Ejercicio 1
+
+>  Consigna: Alineá "BANANA" y "MANZANA"
 
 <table class="umi-alignment-table" >
   <tr class="umi-alignment-row"  data-align-expected="-BAN-ANA">
@@ -39,7 +39,36 @@
   </tr>
 </table>
 
+## Ejercicio 2
+
+>  Consigna: Alineá "ANA" y "ANANA"
+
+<table class="umi-alignment-table" >
+  <tr class="umi-alignment-row"  data-align-expected="--ANA">
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+  </tr>
+  <tr class="umi-alignment-row" data-align-expected="ANANA">
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+  </tr>
+  <tr class="umi-alignment-results">
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-cell"></td>
+  </tr>
+</table>
+
 <script>
-  sampleTable = new AlignmentTable($(".umi-alignment-table"));
+  new AlignmentTable($(".umi-alignment-table")[0]);
+  new AlignmentTable($(".umi-alignment-table")[1]);
 </script>
 
