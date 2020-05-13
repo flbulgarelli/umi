@@ -40,6 +40,8 @@ Para comenzar a pensar sobre las complejidades que reviste este análisis comenc
 <p class='disparadores'>
  ☑️ PREGUNTAS DISPARADORAS: ¿Existe una única forma de alinearlas? ¿Es alguno de los posibles alineamientos mejor que otro? Si así fuera ¿Por qué?
 </p>
+
+
 <div class='container'> 
 <table class="umi-alignment-table" >
   <tr class="umi-alignment-row"  data-align-expected="-BAN-ANA"></tr>
@@ -57,15 +59,18 @@ Para comenzar a pensar sobre las complejidades que reviste este análisis comenc
 </table>
 </div>
 
+
+
 <p class='informative-text'>
 Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder inferir relaciones evolutivas entre ellas y evaluar el parecido entre ellas. Sin embargo, poder evaluar el parecido entre dos secuencias pude collevar algunas dificultades. En primera instancia definamos un concepto que nos puede ser útil en este sentido, la <i>identidad</i>. Este se define como la suma de residuos idénticos en posiciones equivalentes en dos secuencias alineadas.
 </p>
 <p class='reto'> 👇 RETO I: En la siguiente tabla probá distintos alineamientos para las palabras "ANA" y "ANANA". Verás que en el margen inferior izquierdo aparece un valor de identidad calculado para cada alineamitno que intentes. </p>
 <p class='reto'> Tomá nota de los valores de identidad observados y de las conclusiones que se desprendan de estas observaciones. </p>
 <p class='disparadores'>
- ☑️ PREGUNTAS DISPARADORAS: ¿Son todos los valores iguales? ¿Qué consideraciones deberían tenerse en cuenta a la hora de realizar el cálculo? 
+ ☑️ PREGUNTAS DISPARADORAS: ¿Son todos los valores iguales? ¿Qué consideraciones deberían tenerse en cuenta a la hora de realizar el cálculo? ¿Se te ocurre, distintas formas de calcularlo? ¿Serán todas ellas igualmente válidas en Biología? 
 </p>
 
+<div class='container'> 
 <table class="umi-alignment-table" >
   <tr class="umi-alignment-row"  data-align-expected="--ANA"></tr>
   <tr class="umi-alignment-row" data-align-expected="ANANA"></tr>
@@ -80,6 +85,8 @@ Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder i
     <td class="umi-alignment-identity-level">
   </tr>
 </table>
+</div>
+
 
 <p class='informative-text'>La similitud es la suma de puntuaciones correspondientes a residuos en posiciones equivalentes en dos secuencias alineadas, dichas puntuaciones suelen estar tabuladas e incluir penalizaciones para las inserciones y deleciones (también llamados gaps, porque insertan huecos en el alineamiento)</p>
 
