@@ -40,6 +40,10 @@ var umi = umi || {};
       return this.value.length;
     }
 
+    word() {
+      return this.value.replace(/-/g, '');
+    }
+
     codons() {
       if (!this.value) {
         return [];
@@ -185,7 +189,7 @@ var umi = umi || {};
     }
 
     _wordOf(value) {
-      return value.replace(/-/g, '')
+      return new Sequence(value).word();
     }
   }
 
