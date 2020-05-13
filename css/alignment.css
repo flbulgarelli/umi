@@ -1,14 +1,15 @@
-.umi-alignment-table, .umi-alignment-cell {
-  border-style: solid;
-  border-width: thin;
+.umi-alignment-table,
+.umi-alignment-cell {
+    border-style: solid;
+    border-width: thin;
 }
 
 .umi-ok {
-  border-color: green;
+    border-color: green;
 }
 
 .umi-nok {
-  border-color: red;
+    border-color: red;
 }
 
 .umi-alignment-row.umi-ok::after {
@@ -17,4 +18,36 @@
 
 .umi-alignment-row.umi-nok::after {
     content: '❎';
+}
+
+.pensar {
+    text-align: center;
+    color: steelblue;
+    font-weight: bold;
+}
+
+.disparadores {
+    text-align: center;
+    color: lightslategray;
+    font-weight: bold;
+}
+
+.reto {
+    text-align: center;
+    color: darkslategray;
+    font-weight: bold;
+}
+
+.informative-text {
+    text-align: justify;
+}
+
+h3 {
+    color: darkslategray;
+}
+
+.container {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
 }
