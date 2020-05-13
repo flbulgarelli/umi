@@ -96,8 +96,6 @@
 </table>
 
 <script>
-  new AlignmentTable($($(".umi-alignment-table")[0]));
-  new AlignmentTable($($(".umi-alignment-table")[1]));
-  new AlignmentTable($($(".umi-alignment-table")[2]));
+  umi.alignment.start();
 </script>
 
