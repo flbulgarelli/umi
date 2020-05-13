@@ -50,7 +50,10 @@ var umi = umi || {};
     _handleKeydown(e) {
       if (e.key.match(/^[A-Za-z\-]$/)) {
         $(e.target).text('')
-      } else if ([8, 37, 39, 46].indexOf(e.key) !== -1) {
+      } else if ([8, 46].indexOf(e.keyCode) !== -1) {
+        $(e.target).text('-');
+        e.preventDefault();
+      } else if ([37, 39, 9, 18].indexOf(e.keyCode) === -1) {
         e.preventDefault();
       }
     }
