@@ -10,7 +10,7 @@ Desde los trabajos realizados por Kossel en 1898 (Kossel, 1898)​ en el que des
 Existen diferentes mecanismos que explican la biodiversidad, como las mutaciones, la duplicación de genes, reorganización de genomas e intercambios genéticos como recombinación, reordenamiento y transferencia lateral de genes. En las poblaciones ocurren variaciones aleatorias entre los organismos individuales, variaciones no ocasionadas por el ambiente, que en algunos casos pueden ser heredables. La interacción de las variaciones al azar y el ambiente determina el grado significativo en el que los organismos se reproducen y sobreviven (selección natural), y por tanto las características de la población. Dado suficiente tiempo, la selección natural lleva a la acumulación de cambios que diferencian los grupos de organismos. El análisis a nivel molecular de la evolución consiste en gran medida en determinar cómo las proteínas y el material genético se han transformado a través del tiempo. 
 </p>
 
-### **PARECIDO NO ES LO MISMO**
+### **JUNTAS A LA PAR**
 <p class='informative-text'>
 Dos secuencias que comparten un ancestro común se denominan secuencias **homólogas** (Reeck et al., 1987). Aunque suele utilizarse muy frecuentemente de modo incorrecto, la homología es cualitativa. Las moléculas homólogas, u homólogos, se pueden dividir en dos clases: parálogos, que son homólogos que están presentes dentro de una especie y que suelen difierir en sus funciones bioquímicas detalladas; y ortólogos son homólogos que están presentes dentro de diferentes especies y tienen funciones muy similares o idénticas. Comprender la homología entre las moléculas puede revelar la historia evolutiva de las mismas, así como información sobre su función; Si una proteína recién secuenciada es homóloga a una proteína ya caracterizada, tenemos una fuerte indicación de la función bioquímica de la nueva proteína. La predicción de homologı́a se realiza extrayendo de las secuencias la información conservada durante la evolución, para lo que resulta necesario la comparación de las secuencias para identificar los residuos que tienen en común.
 </p>
@@ -26,7 +26,8 @@ Sin embargo, es importante tener en cuenta que con el tiempo dos genes pueden ac
 👉 PARA PENSAR: ¿Por qué crees que es mejor evaluar las relaciones evolutivas lejanas comparando proteínas, como dice el texto? 🤔 
 </p>
 
-### **JUNTAS A LA PAR**
+
+### **PARECIDO NO ES LO MISMO**
 <p class='informative-text'>
 Como se explicó anteriormente, la forma de encontrar relaciones evolutivas entre dos secuencias y evaluar el parecido entre ellas implica la comparación posición a posición entre ambas. Si bien, las secuencias proteicas y de ácidos nucleicos pueden ser pensads como textos, o cadenas de caracteres, el proceso de alinear dos secuencia no es tan sencillo como poner una secuencia encima de otra y comparar columna a columna si existe concordancia entre los residuos (o caracteres). ¿Por qué? Pus porque como dijimos antes, a lo largo del tiempo las secuencias pueden  mutaciones, inserciones y deleciones, y la consideración de estos cambios no es resulta trivial.
 </p>
@@ -34,7 +35,8 @@ Como se explicó anteriormente, la forma de encontrar relaciones evolutivas entr
 Para comenzar a pensar sobre las complejidades que reviste este análisis comencemos con un ejemplo sencillo, de comparación de dos secuencias de "lenguaje no celular". Supongamos que queremos alinear dos pequeñas palabras (cadenas de caracteres o strings): "BANANA" y "MANZANA". Si prestamos atención a estas dos palabras podemos notar una diferencia sustancial entre ellas, que nos complica por sobre manera el análisis. ¿Se dan cuenta a qué nos referimos? ¡Exacto! ¡A la diferencia de longitud! 
 </p>
 
-<p class='reto'> 👇 RETO I: Intentemos, entonces alinear estas dos palabras, para comprender mejor el problema. Alineá aquí "BANANA" y "MANZANA" y tomá nota de tus observaciones </p>
+<p class='reto'> 👇 RETO I: Intentemos, entonces alinear estas dos palabras, para comprender mejor el problema. Alineá en la siguiente table de comparaciones las palabras "BANANA" y "MANZANA".</p>
+<p class='reto'> ¡Tomá nota de tus observaciones y de las conclusiones que se desprendan de estas observaciones! </p>
 <p class='disparadores'>
  ☑️ PREGUNTAS DISPARADORAS: ¿Existe una única forma de alinearlas? ¿Es alguno de los posibles alineamientos mejor que otro? Si así fuera ¿Por qué?
 </p>
@@ -55,9 +57,14 @@ Para comenzar a pensar sobre las complejidades que reviste este análisis comenc
 </table>
 </div>
 
-## Ejercicio 2
-
->  Consigna: Alineá "ANA" y "ANANA"
+<p class='informative-text'>
+Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder inferir relaciones evolutivas entre ellas y evaluar el parecido entre ellas. Sin embargo, poder evaluar el parecido entre dos secuencias pude collevar algunas dificultades. En primera instancia definamos un concepto que nos puede ser útil en este sentido, la <i>identidad</i>. Este se define como la suma de residuos idénticos en posiciones equivalentes en dos secuencias alineadas.
+</p>
+<p class='reto'> 👇 RETO I: En la siguiente tabla probá distintos alineamientos para las palabras "ANA" y "ANANA". Verás que en el margen inferior izquierdo aparece un valor de identidad calculado para cada alineamitno que intentes. </p>
+<p class='reto'> Tomá nota de los valores de identidad observados y de las conclusiones que se desprendan de estas observaciones. </p>
+<p class='disparadores'>
+ ☑️ PREGUNTAS DISPARADORAS: ¿Son todos los valores iguales? ¿Qué consideraciones deberían tenerse en cuenta a la hora de realizar el cálculo? 
+</p>
 
 <table class="umi-alignment-table" >
   <tr class="umi-alignment-row"  data-align-expected="--ANA"></tr>
@@ -74,7 +81,7 @@ Para comenzar a pensar sobre las complejidades que reviste este análisis comenc
   </tr>
 </table>
 
-## Ejercicio 3
+<p class='informative-text'>La similitud es la suma de puntuaciones correspondientes a residuos en posiciones equivalentes en dos secuencias alineadas, dichas puntuaciones suelen estar tabuladas e incluir penalizaciones para las inserciones y deleciones (también llamados gaps, porque insertan huecos en el alineamiento)</p>
 
 >  Consigna: Alineá "ANA" y "ANANA"
 
