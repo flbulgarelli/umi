@@ -1,8 +1,21 @@
 var umi = umi || {};
 ((umi) => {
+  function identity(x, y, gapPenalty = 0) {
+    let matches = 0;
+    let length = Math.min(x.length, y.length)
+    for (let i = 0; i < length; i++) {
+      if (x[i] === '-' || y[i] === '-') {
+        matches -= gapPenalty;
+      } else if (x[i] === y[i]) {
+        matches++;
+      }
+    }
+    return matches / length;
+  }
+
   function checkAlignment(x, y) {
     let results = []
-    for(let i = 0; i < Math.max(x.length, y.length); i++) {
+    for (let i = 0; i < Math.max(x.length, y.length); i++) {
       results.push(
         (x[i] === '-' && y[i] !== '-') ||
         (x[i] !== '-' && y[i] === '-') ||
@@ -147,6 +160,7 @@ var umi = umi || {};
       this.$table = $table;
       this._initializeRows();
       this._initializeResults();
+      this._initializeIdentityLevel();
       setupUmiStyles(this);
     }
 
@@ -163,6 +177,16 @@ var umi = umi || {};
       };
       this.onChange(updateResults)
       updateResults();
+    }
+
+    _initializeIdentityLevel() {
+      let $level = this.$table.find('.umi-alignment-identity-level');
+      let update = () => {
+        let result = identity(this.rows[0].value(), this.rows[1].value())
+        $level.text(result);
+      };
+      this.onChange(update)
+      update();
     }
 
     onChange(f) {
@@ -194,5 +218,11 @@ var umi = umi || {};
       })
     })
   }
-  umi.alignment = {AlignmentTable, AlignmentRow, start};
+  umi.alignment = {
+    AlignmentTable,
+    AlignmentRow,
+    start,
+    checkAlignment,
+    identity,
+  };
 })(umi);

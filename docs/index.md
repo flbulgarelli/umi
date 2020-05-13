@@ -35,6 +35,9 @@
       <td class="umi-alignment-result"></td>
       <td class="umi-alignment-result"></td>
   </tr>
+  <tr>
+    <td class="umi-alignment-identity-level">
+  </tr>
 </table>
 
 ## Ejercicio 3
