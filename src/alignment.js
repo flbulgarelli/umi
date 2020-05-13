@@ -24,21 +24,6 @@ var umi = umi || {};
     return results;
   }
 
-  function setupUmiStyles(element) {
-    updateUmiStyles(element);
-    element.onChange(updateUmiStyles);
-  }
-
-  function updateUmiStyles(element) {
-    if (element.isOk()) {
-      element.$.addClass('umi-ok');
-      element.$.removeClass('umi-nok');
-    } else {
-      element.$.removeClass('umi-ok');
-      element.$.addClass('umi-nok');
-    }
-  }
-
   function fillValues(values, $values, defaultValue) {
     $values.each((index, it) => {
       let $value = $(it);
@@ -51,7 +36,6 @@ var umi = umi || {};
       this.$row = $row;
       this._initializeKeydown();
       this._initializeCells();
-      setupUmiStyles(this)
     }
 
     _initializeKeydown() {
@@ -160,8 +144,6 @@ var umi = umi || {};
       this.$table = $table;
       this._initializeRows();
       this._initializeResults();
-      this._initializeIdentityLevel();
-      setupUmiStyles(this);
     }
 
     _initializeRows() {
@@ -171,22 +153,15 @@ var umi = umi || {};
 
     _initializeResults() {
       let $results = this.$table.find('.umi-alignment-result');
-      let updateResults = () => {
-        let results = checkAlignment(this.rows[0].value(), this.rows[1].value()).map(it => it ? '✅' : '❎');
+      this.onceAndOnChange(() => {
+        let results = checkAlignment(this.firstValue(), this.secondValue()).map(it => it ? '✅' : '❎');
         fillValues(results, $results);
-      };
-      this.onChange(updateResults)
-      updateResults();
+      })
     }
 
-    _initializeIdentityLevel() {
-      let $level = this.$table.find('.umi-alignment-identity-level');
-      let update = () => {
-        let result = identity(this.rows[0].value(), this.rows[1].value())
-        $level.text(result);
-      };
-      this.onChange(update)
-      update();
+    onceAndOnChange(f) {
+      this.onChange(f);
+      f();
     }
 
     onChange(f) {
@@ -201,6 +176,14 @@ var umi = umi || {};
       return this.rows.map(it => it.value());
     }
 
+    firstValue() {
+      return this.rows[0].value();
+    }
+
+    secondValue() {
+      return this.rows[1].value();
+    }
+
     isExpected() {
       return this.rows.every((it) => it.isExpected());
     }
@@ -210,11 +193,62 @@ var umi = umi || {};
     }
   }
 
+  class IdentityCalculator {
+    constructor($gapPenalty, $identityLevel) {
+      this.$gapPenalty = $gapPenalty;
+      this.$identityLevel = $identityLevel;
+      this._initializeGapPenalty();
+    }
+
+    _initializeGapPenalty() {
+      this.$gapPenalty.change(function () {
+        this._eval();
+      }.bind(this));
+    }
+
+    updateValues(table) {
+      this.first = table.firstValue();
+      this.second = table.secondValue();
+      this._eval();
+    }
+
+    gapPenalty() {
+      return this.$gapPenalty.val();
+    }
+
+    identityLevel() {
+      return identity(this.first, this.second, this.gapPenalty());
+    }
+
+    _eval() {
+      this.$identityLevel.text(this.identityLevel());
+    }
+  }
+
+  class AlignmentCard {
+    constructor($card) {
+      this.$card = $card;
+      this.table = new AlignmentTable($card.find('.umi-alignment-table'));
+      this.identityCalculator = new IdentityCalculator(
+        $card.find('.umi-alignment-gap-penalty'),
+        $card.find('.umi-alignment-identity-level'),
+      );
+      this.$status = $card.find('.umi-alignment-status');
+      this._initializeIdentityLevel();
+    }
+
+    _initializeIdentityLevel() {
+      this.table.onceAndOnChange(() => {
+        this.identityCalculator.updateValues(this.table);
+      });
+    }
+  }
+
   function start() {
     $(() => {
-      umi.alignment.tables = [];
-      $(".umi-alignment-table").each((_index, table) => {
-        umi.alignment.tables.push(new AlignmentTable($(table)));
+      umi.alignment.cards = [];
+      $(".umi-alignment-card").each((_index, card) => {
+        umi.alignment.cards.push(new AlignmentCard($(card)));
       })
     })
   }

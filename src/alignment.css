@@ -4,20 +4,16 @@
     border-width: thin;
 }
 
-.umi-ok {
-    border-color: green;
+.umi-alignment-card {
+  border-style: solid;
+  border-radius: 11px;
+  border-width: thin;
+  padding: 30px;
+  margin: 10px 0;
 }
 
-.umi-nok {
-    border-color: red;
-}
-
-.umi-alignment-row.umi-ok::after {
-    content: '✅';
-}
-
-.umi-alignment-row.umi-nok::after {
-    content: '❎';
+.umi-alignment-card .umi-alignment-table {
+  margin: 0;
 }
 
 .pensar {
