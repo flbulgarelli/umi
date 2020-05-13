@@ -7,26 +7,8 @@
 >  Consigna: Alineá "BANANA" y "MANZANA"
 
 <table class="umi-alignment-table" >
-  <tr class="umi-alignment-row"  data-align-expected="-BAN-ANA">
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-  </tr>
-  <tr class="umi-alignment-row" data-align-expected="M-ANZANA">
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-  </tr>
+  <tr class="umi-alignment-row"  data-align-expected="-BAN-ANA"></tr>
+  <tr class="umi-alignment-row" data-align-expected="M-ANZANA"></tr>
   <tr class="umi-alignment-results">
       <td class="umi-alignment-result"></td>
       <td class="umi-alignment-result"></td>
@@ -47,11 +29,11 @@
   <tr class="umi-alignment-row"  data-align-expected="--ANA"></tr>
   <tr class="umi-alignment-row" data-align-expected="ANANA"></tr>
   <tr class="umi-alignment-results">
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-result"></td>
+      <td class="umi-alignment-result"></td>
+      <td class="umi-alignment-result"></td>
+      <td class="umi-alignment-result"></td>
+      <td class="umi-alignment-result"></td>
   </tr>
 </table>
 
@@ -63,11 +45,11 @@
   <tr class="umi-alignment-row"  data-align-expected="--ANA" data-align-initial="A-N-A"></tr>
   <tr class="umi-alignment-row" data-align-expected="ANANA" data-align-initial="-"></tr>
   <tr class="umi-alignment-results">
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
+      <td class="umi-alignment-result"></td>
+      <td class="umi-alignment-result"></td>
+      <td class="umi-alignment-result"></td>
+      <td class="umi-alignment-result"></td>
+      <td class="umi-alignment-result"></td>
   </tr>
 </table>
 
