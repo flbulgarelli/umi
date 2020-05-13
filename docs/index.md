@@ -44,20 +44,8 @@
 >  Consigna: Alineá "ANA" y "ANANA"
 
 <table class="umi-alignment-table" >
-  <tr class="umi-alignment-row"  data-align-expected="--ANA">
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-  </tr>
-  <tr class="umi-alignment-row" data-align-expected="ANANA">
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-  </tr>
+  <tr class="umi-alignment-row"  data-align-expected="--ANA"></tr>
+  <tr class="umi-alignment-row" data-align-expected="ANANA"></tr>
   <tr class="umi-alignment-results">
       <td class="umi-alignment-cell"></td>
       <td class="umi-alignment-cell"></td>
@@ -72,20 +60,8 @@
 >  Consigna: Alineá "ANA" y "ANANA"
 
 <table class="umi-alignment-table" >
-  <tr class="umi-alignment-row"  data-align-expected="--ANA" data-align-initial="A-N-A">
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-  </tr>
-  <tr class="umi-alignment-row" data-align-expected="ANANA" data-align-initial="-">
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-      <td class="umi-alignment-cell"></td>
-  </tr>
+  <tr class="umi-alignment-row"  data-align-expected="--ANA" data-align-initial="A-N-A"></tr>
+  <tr class="umi-alignment-row" data-align-expected="ANANA" data-align-initial="-"></tr>
   <tr class="umi-alignment-results">
       <td class="umi-alignment-cell"></td>
       <td class="umi-alignment-cell"></td>

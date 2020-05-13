@@ -57,14 +57,39 @@ var umi = umi || {};
 
     _initializeCells() {
       let initial = this.initial();
-      let $cells = this.$row.find('.umi-alignment-cell');
+      let $cells = this._findOrCreateCells();
 
       fillValues(initial, $cells, '-');
       $cells.each((index, it) => $(it).attr('contenteditable', true) );
     }
 
+    _findOrCreateCells() {
+      let cells = () => this.$row.find('.umi-alignment-cell');
+      let $cells = cells();
+      if ($cells.length === 0) {
+        for (let i = 0; i < this.length; i++) {
+          this.$row.append('<td class="umi-alignment-cell"></td>')
+        }
+        return cells();
+      } else {
+        return $cells;
+      }
+    }
+
     onChange(f) {
       this.$row.on('input', function (e) { f(this) }.bind(this));
+    }
+
+    get length() {
+      if (!this._length) {
+        let initialOrExpected = this.expected() || this.initial();
+        if (initialOrExpected) {
+          this._length = initialOrExpected.length;
+        } else {
+          this._length = this.$row.data('alignLength');
+        }
+      }
+      return this._length;
     }
 
     initial() {
