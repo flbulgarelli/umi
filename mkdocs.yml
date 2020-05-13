@@ -3,5 +3,5 @@ site_url: https://flbulgarelli.github.io/umi
 nav:
   - Home: index.md
 repo_url: "https://github.com/flbulgarelli/umi"
-copyright: '© Copyright 2020 Franco Leonardo Bulgarelli '
+copyright: '© Copyright 2020 Franco Leonardo Bulgarelli & Ana Julia Velez Rueda'
 theme: readthedocs
