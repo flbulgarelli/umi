@@ -33,10 +33,12 @@ Como se explicó anteriormente, la forma de encontrar relaciones evolutivas entr
 <p class='informative-text'>
 Para comenzar a pensar sobre las complejidades que reviste este análisis comencemos con un ejemplo sencillo, de comparación de dos secuencias de "lenguaje no celular". Supongamos que queremos alinear dos pequeñas palabras (cadenas de caracteres o strings): "BANANA" y "MANZANA". Si prestamos atención a estas dos palabras podemos notar una diferencia sustancial entre ellas, que nos complica por sobre manera el análisis. ¿Se dan cuenta a qué nos referimos? ¡Exacto! ¡Las diferencias de longitud! 
 </p>
-### Ejercicio 1
 
->  Consigna: Alineá "BANANA" y "MANZANA"
-
+<p class='reto'> 👇 RETO I: Intentemos, entonces alinear estas dos palabras, para comprender mejor el problema. Alineá aquí "BANANA" y "MANZANA" y tomá nota de tus observaciones </p>
+<p class='disparadores'>
+ ☑️ PREGUNTAS DISPARADORAS: ¿Existe una única forma de alinearlas? ¿Es alguno de los posibles alineamientos mejor que otro? Si así fuera ¿Por qué?
+</p>
+<div class='container'> 
 <table class="umi-alignment-table" >
   <tr class="umi-alignment-row"  data-align-expected="-BAN-ANA"></tr>
   <tr class="umi-alignment-row" data-align-expected="M-ANZANA"></tr>
@@ -51,6 +53,7 @@ Para comenzar a pensar sobre las complejidades que reviste este análisis comenc
       <td class="umi-alignment-result"></td>
   </tr>
 </table>
+</div>
 
 ## Ejercicio 2
 

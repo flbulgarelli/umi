@@ -22,6 +22,18 @@
 
 .pensar {
     text-align: center;
+    color: steelblue;
+    font-weight: bold;
+}
+
+.disparadores {
+    text-align: center;
+    color: lightslategray;
+    font-weight: bold;
+}
+
+.reto {
+    text-align: center;
     color: darkslategray;
     font-weight: bold;
 }
@@ -32,4 +44,10 @@
 
 h3 {
     color: darkslategray;
+}
+
+.container {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
 }
