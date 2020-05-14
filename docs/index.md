@@ -38,7 +38,7 @@ Para comenzar a pensar sobre las complejidades que reviste este análisis comenc
 <p class='reto'> 👇 RETO I: Intentemos, entonces alinear estas dos palabras, para comprender mejor el problema. Alineá en la siguiente table de comparaciones las palabras "BANANA" y "MANZANA".</p>
 <p class='reto'> ¡Tomá nota de tus observaciones y de las conclusiones que se desprendan de estas observaciones! </p>
 <p class='disparadores'>
- ☑️ PREGUNTAS DISPARADORAS: ¿Existe una única forma de alinearlas? ¿Es alguno de los posibles alineamientos mejor que otro? Si así fuera ¿Por qué? 
+ ☑️ PREGUNTAS DISPARADORAS: ¿Existe una única forma de alinearlas? ¿Es alguno de los posibles alineamientos mejor que otro? Si así fuera ¿Por qué?
 </p>
 
 <div class="umi-alignment-card">
@@ -54,7 +54,7 @@ Para comenzar a pensar sobre las complejidades que reviste este análisis comenc
     </tr>
   </table>
 
-  <div>
+  <div class="umi-alignment-card-results">
     <span class="umi-alignment-card-result"></span>
   </div>
 </div>
@@ -74,9 +74,15 @@ Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder i
 
 
 <div class="umi-alignment-card">
-  <div>
-    <label for="umi-alignment-identity-level-1">Identidad</label>
-    <span id="umi-alignment-identity-level-1" class="umi-alignment-identity-level"></span>
+  <div class="umi-alignment-inputs">
+    <div class="umi-alignment-input">
+      <label for="umi-alignment-gap-penalty-1">Penalidad</label>
+      <input id="umi-alignment-gap-penalty-1" class="umi-alignment-gap-penalty" type="number" min="0" value="1">
+    </div>
+    <div class="umi-alignment-input">
+      <label for="umi-alignment-identity-level-1">Identidad</label>
+      <span id="umi-alignment-identity-level-1" class="umi-alignment-identity-level"></span>
+    </div>
   </div>
 
   <table class="umi-alignment-table">
@@ -91,7 +97,7 @@ Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder i
     </tr>
   </table>
 
-  <div>
+  <div class="umi-alignment-card-results">
     <span class="umi-alignment-card-result"></span>
   </div>
 </div>
@@ -102,7 +108,7 @@ Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder i
 <p class='reto'> Probá varias combinaciones, tomá nota de los valores de identidad observados y de las conclusiones que se desprendan de estas observaciones. </p>
 
 <p class='disparadores'>
- ☑️ PREGUNTAS DISPARADORAS: ¿Cómo se relacionan los valores de identidad obtenidos con las penalizaciones que se imponen al gap? ¿Qué implicancias crees que tiene una mayor penalización de gaps? ¿Se te ocurre alguna otra forma de penalización que no haya sido tenido en cuenta en este ejemplo? 
+ ☑️ PREGUNTAS DISPARADORAS: ¿Cómo se relacionan los valores de identidad obtenidos con las penalizaciones que se imponen al gap? ¿Qué implicancias crees que tiene una mayor penalización de gaps? ¿Se te ocurre alguna otra forma de penalización que no haya sido tenido en cuenta en este ejemplo?
 </p>
 
 <div class="umi-alignment-card">
@@ -150,7 +156,7 @@ OJO!ACA VA TABLA!!!
 </p>
 
 <p class='informative-text'>Otra forma de estimar el parecido entre dos secuencias pondera estas implicancias en la presencia de inserciones y deleciones que estuvimos evaluando, además de puntuaciones que ponderen los cambios de un caracter por otro de forma diferencial. ¿Por qué? Porque si hablamos de nucleótidos o aminoácidos estarán de acuerdo que no es indistinto cambiar uno por otro. Una mutación en un aminoácido puede, por ejemplo, generar un cambio drástico en la polaridad de una región de la proteína o implicar un cambio a nivel de su estructura secundaria. Por lo tanto, podríamos estimar la <i>similitud</i> que existe entre dos secuencias, como la suma de puntuaciones correspondientes a residuos en posiciones equivalentes en dos secuencias alineadas. Las tablas de puntuaciones de sustitución de un residuo por otro se denominan <i>matrices de sustitución</i>, y se construyen teniendo en cuenta los cambios observados en secuencias conocidas. </p>
-<p class='informative-text'> Margaret Dayhoff desarrolló las matrices PAM para aminoácidos, que se basan en las secuencias de proteínas que había compilado durante una década, publicadas como el Atlas de secuencia y estructura de proteínas (Dayhoff, 1978). 
+<p class='informative-text'> Margaret Dayhoff desarrolló las matrices PAM para aminoácidos, que se basan en las secuencias de proteínas que había compilado durante una década, publicadas como el Atlas de secuencia y estructura de proteínas (Dayhoff, 1978).
 En las matrices PAM cada elemento de la matriz Mij cuantifica la probabilidad de que un aminoácido i sea reemplazado por otro aminoácido j en el intervalo evolutivo de 1 PAM (1 PAM se define como el intervalo evolutivo en que cambia un 1% de los aminoácidos en el alineamiento de 2 secuencias).Estas mutaciones se identificaron comparando secuencias muy similares con al menos un 85% de identidad, y se supone que cualquier sustitución observada fue el resultado de una única mutación entre la secuencia ancestral y una de las secuencias actuales. Las matrices de sustitución se utilizan como parámetros de los algoritmos de alineamientos de secuencias proteicas, de forma de poder asignarle una puntuación a cada posible aliniamiento, y de este modo poder elegir el mejor. En el caso de los alineamientos de nucleótidos, suelen utilizarse un sistema de puntuación mucho más simple.</p>
 <img src="pam1.png"></img>
 
@@ -160,18 +166,18 @@ En las matrices PAM cada elemento de la matriz Mij cuantifica la probabilidad de
 
 ### **TIPOS DE ALINEAMIENTOS**
 <p class='informative-text'>
-Existen distintas herramientas para alinear secuencias, que podríamos clasificar en dos tipos: 
+Existen distintas herramientas para alinear secuencias, que podríamos clasificar en dos tipos:
 
 > - Global: alineamiento de la secuencia completa. Es útil cuando se comparan secuencias muy similares en tamaño y composición, por ejemplo de dos genes muy conservados.
 > - Local: cuando sólo nos interesa alinear regiones similares entre secuencias. Se utiliza cuando las secuencias a comparar son diferentes en tamaño o poseen regiones no conservadas
 </p>
 
-<p class='informative-text'> Un de los más importantes algoritmos para encontrar alineamientos globales es el de Needleman-Wunsch. Este es un ejemplo de algoritmo de programación dinámica, que subdivide los problemas de cálculo, asegurando encontrar la solución óptima para 2 secuencias dadas. Este utiliza una matriz cuadrada para asignar puntuación para los distintos alineamientos posibles, dada una puntuación para matches, mismatches y gaps; y luego retrocediendo a lo largo de la mejor alineación posible (de mayor puntuación). 
+<p class='informative-text'> Un de los más importantes algoritmos para encontrar alineamientos globales es el de Needleman-Wunsch. Este es un ejemplo de algoritmo de programación dinámica, que subdivide los problemas de cálculo, asegurando encontrar la solución óptima para 2 secuencias dadas. Este utiliza una matriz cuadrada para asignar puntuación para los distintos alineamientos posibles, dada una puntuación para matches, mismatches y gaps; y luego retrocediendo a lo largo de la mejor alineación posible (de mayor puntuación).
 </p>
 <p class='informative-text'> Asimismo existen herramientas que permiten tanto comparaciones de secuencias de a pares y o realizar alineamientos múltiples:
 
 > -  A pares de secuencias: mide la similitud entre dos secuencias.
-> -  Alineamiento múltiple: compara más de dos secuencias al mismo tiempo. 
+> -  Alineamiento múltiple: compara más de dos secuencias al mismo tiempo.
 
 En ambos casos el alineamiento puede ser local o global, lo que supondrá algunas limitaciones de uso para cada caso.
 </p>

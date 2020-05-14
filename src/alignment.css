@@ -1,43 +1,88 @@
+/* Umi */
+
 .umi-alignment-table,
 .umi-alignment-cell {
-    border-style: solid;
-    border-width: thin;
+  border-style: solid;
+  border-width: thin;
+}
+
+table.umi-alignment-table {
+  margin-bottom: 0;
+  text-align: center;
 }
 
 .umi-alignment-card {
-    border-style: solid;
-    border-radius: 11px;
-    border-width: thin;
-    padding: 30px;
-    margin: 10px 0;
+  /* border */
+  border-style: solid;
+  border-width: thin;
+  border-radius: 11px;
+
+  /* positioning */
+  padding: 30px;
+  margin: 21px auto;
+  width: 70%;
 }
 
-.umi-alignment-card .umi-alignment-table {
-    margin: 0;
+.umi-alignment-card-results {
+  display: flex;
+  flex-direction: row-reverse;
 }
+
+.umi-alignment-inputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  margin: 7px 0
+}
+
+.umi-alignment-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  margin: 7px 0
+}
+
+.umi-alignment-input label,
+.umi-alignment-input input,
+.umi-alignment-input span {
+  margin-right: 7px;
+  padding: 5px 0;
+}
+
+/* Mkdocs */
+
+table.docutils.umi-alignment-table {
+  margin-bottom: 0;
+}
+
+.umi-alignment-card {
+  border-color: #c9c9c9;
+}
+
+/* Tutorials */
 
 .pensar {
-    text-align: center;
-    color: steelblue;
-    font-weight: bold;
+  text-align: center;
+  color: steelblue;
+  font-weight: bold;
 }
 
 .disparadores {
-    text-align: center;
-    color: lightslategray;
-    font-weight: bold;
+  text-align: center;
+  color: lightslategray;
+  font-weight: bold;
 }
 
 .reto {
-    text-align: center;
-    color: darkslategray;
-    font-weight: bold;
+  text-align: center;
+  color: darkslategray;
+  font-weight: bold;
 }
 
 .informative-text {
-    text-align: justify;
+  text-align: justify;
 }
 
 h3 {
-    color: darkslategray;
+  color: darkslategray;
 }
