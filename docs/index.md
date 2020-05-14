@@ -41,22 +41,22 @@ Para comenzar a pensar sobre las complejidades que reviste este análisis comenc
  ☑️ PREGUNTAS DISPARADORAS: ¿Existe una única forma de alinearlas? ¿Es alguno de los posibles alineamientos mejor que otro? Si así fuera ¿Por qué?
 </p>
 
+<div class="umi-alignment-card">
+  <table class="umi-alignment-table">
+    <tr class="umi-alignment-row"  data-align-expected="-BAN-ANA">
+      <td class="umi-alignment-word-result"></td>
+    </tr>
+    <tr class="umi-alignment-row" data-align-expected="M-ANZANA">
+      <td class="umi-alignment-word-result"></td>
+    </tr>
+    <tr class="umi-alignment-results">
+      <td class="umi-alignment-general-result"></td>
+    </tr>
+  </table>
 
-<div class='container'>
-<table class="umi-alignment-table" >
-  <tr class="umi-alignment-row"  data-align-expected="-BAN-ANA"></tr>
-  <tr class="umi-alignment-row" data-align-expected="M-ANZANA"></tr>
-  <tr class="umi-alignment-results">
-      <td class="umi-alignment-result"></td>
-      <td class="umi-alignment-result"></td>
-      <td class="umi-alignment-result"></td>
-      <td class="umi-alignment-result"></td>
-      <td class="umi-alignment-result"></td>
-      <td class="umi-alignment-result"></td>
-      <td class="umi-alignment-result"></td>
-      <td class="umi-alignment-result"></td>
-  </tr>
-</table>
+  <div>
+    <span class="umi-alignment-card-result"></span>
+  </div>
 </div>
 
 
@@ -70,21 +70,32 @@ Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder i
  ☑️ PREGUNTAS DISPARADORAS: ¿Son todos los valores iguales? ¿Qué consideraciones deberían tenerse en cuenta a la hora de realizar el cálculo? ¿Se te ocurre, distintas formas de calcularlo? ¿Serán todas ellas igualmente válidas en Biología?
 </p>
 
-<div class='container'>
-<table class="umi-alignment-table" >
-  <tr class="umi-alignment-row"  data-align-expected="--ANA"></tr>
-  <tr class="umi-alignment-row" data-align-expected="ANANA"></tr>
-  <tr class="umi-alignment-results">
-      <td class="umi-alignment-result"></td>
-      <td class="umi-alignment-result"></td>
-      <td class="umi-alignment-result"></td>
-      <td class="umi-alignment-result"></td>
-      <td class="umi-alignment-result"></td>
-  </tr>
-  <tr>
-    <td class="umi-alignment-identity-level">
-  </tr>
-</table>
+<div class="umi-alignment-card">
+  <div>
+    <label for="umi-alignment-gap-penalty-1">Penalidad</label>
+    <input id="umi-alignment-gap-penalty-1" class="umi-alignment-gap-penalty" type="number" min="0" value="1">
+  </div>
+
+  <div>
+    <label for="umi-alignment-identity-level-1">Identidad</label>
+    <span id="umi-alignment-identity-level-1" class="umi-alignment-identity-level"></span>
+  </div>
+
+  <table class="umi-alignment-table">
+    <tr class="umi-alignment-row"  data-align-expected="--ANA">
+      <td class="umi-alignment-word-result"></td>
+    </tr>
+    <tr class="umi-alignment-row" data-align-expected="ANANA">
+      <td class="umi-alignment-word-result"></td>
+    </tr>
+    <tr class="umi-alignment-results">
+      <td class="umi-alignment-general-result"></td>
+    </tr>
+  </table>
+
+  <div>
+    <span class="umi-alignment-card-result"></span>
+  </div>
 </div>
 
 
