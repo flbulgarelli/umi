@@ -28,16 +28,29 @@ var umi = umi || {};
     return results;
   }
 
+  // ============================
+  // Generic Components Combiners
+  // ============================
+
+  function onceAndOnChange(component, f) {
+    component.onChange(f);
+    f();
+  }
+
   // ====================
   // Generic UI Renderers
   // ====================
+
+  function toCheck(value) {
+    return value ? '✅' : '❎';
+  }
 
   function findOrCreateCells(klass, parent, count) {
     let cells = () => parent.find(`.${klass}`);
     let $cells = cells();
     if ($cells.length === 0) {
       for (let i = 0; i < count; i++) {
-        parent.append(`<td class="${klass}"></td>`)
+        parent.prepend(`<td class="${klass}"></td>`)
       }
       return cells();
     } else {
@@ -120,6 +133,7 @@ var umi = umi || {};
       this.$row = $row;
       this._initializeKeydown();
       this._initializeCells();
+      this._initializeWordResult();
     }
 
     _initializeKeydown() {
@@ -140,11 +154,17 @@ var umi = umi || {};
     }
 
     _initializeCells() {
-      let initial = this.initial();
-      let $cells = findOrCreateCells('umi-alignment-cell', this.$row, this.length);
+      this.$cells = findOrCreateCells('umi-alignment-cell', this.$row, this.length);
 
-      fillValues(initial, $cells, '-');
-      $cells.each((index, it) => $(it).attr('contenteditable', true) );
+      fillValues(this.initial(), this.$cells, '-');
+      this.$cells.each((index, it) => $(it).attr('contenteditable', true) );
+    }
+
+    _initializeWordResult() {
+      this.$wordResult = this.$row.find('.umi-alignment-word-result');
+      onceAndOnChange(this, () => {
+        this.$wordResult.text(toCheck(this.isExpectedWord()));
+      });
     }
 
     onChange(f) {
@@ -174,7 +194,7 @@ var umi = umi || {};
     }
 
     value() {
-      return this.$row.text().replace(/[\n ]/g, '');
+      return this.$cells.text().replace(/[\n ]/g, '');
     }
 
     word() {
@@ -197,10 +217,6 @@ var umi = umi || {};
       return this.word() === this.expectedWord();
     }
 
-    isOk() {
-      return this.isExpectedWord();
-    }
-
     _wordOf(value) {
       return new Sequence(value).word();
     }
@@ -221,15 +237,10 @@ var umi = umi || {};
     _initializeResults() {
       let $results = findOrCreateCells('umi-alignment-result', this.$table.find('.umi-alignment-results'), this.length);
 
-      this.onceAndOnChange(() => {
-        let results = checkAlignment(this.firstValue(), this.secondValue()).map(it => it ? '✅' : '❎');
+      onceAndOnChange(this, () => {
+        let results = checkAlignment(this.firstValue(), this.secondValue()).map(toCheck);
         fillValues(results, $results);
       })
-    }
-
-    onceAndOnChange(f) {
-      this.onChange(f);
-      f();
     }
 
     onChange(f) {
@@ -254,10 +265,6 @@ var umi = umi || {};
 
     isExpected() {
       return this.rows.every((it) => it.isExpected());
-    }
-
-    isOk() {
-      return this.isExpected();
     }
   }
 
@@ -306,7 +313,7 @@ var umi = umi || {};
     }
 
     _initializeIdentityLevel() {
-      this.table.onceAndOnChange(() => {
+      onceAndOnChange(this.table, () => {
         this.identityCalculator.updateValues(this.table);
       });
     }
