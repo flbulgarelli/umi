@@ -118,10 +118,61 @@ Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder i
     </tr>
   </table>
 
-  <div>
+  <div class="umi-alignment-card-results">
     <span class="umi-alignment-card-result" ></span>
   </div>
 </div>
+
+>  Consigna: Alineá "AGCGGT" y "TGCAGAGGG" y mirá las traducciones
+
+<div class="umi-alignment-card" style="width: 84%">
+   <div class="umi-alignment-inputs">
+    <div class="umi-alignment-input">
+      <label for="umi-alignment-gap-penalty-2">Penalidad</label>
+      <input id="umi-alignment-gap-penalty-2" class="umi-alignment-gap-penalty" type="number" min="0" value="0">
+    </div>
+
+    <div class="umi-alignment-input">
+      <label for="umi-alignment-identity-level-2">Identidad</label>
+      <span id="umi-alignment-identity-level-2" class="umi-alignment-identity-level"></span>
+    </div>
+  </div>
+
+  <table class="umi-alignment-table" >
+    <tr class="umi-alignment-results">
+      <td class="umi-alignment-general-result"></td>
+    </tr>
+    <tr class="umi-alignment-row"  data-align-expected="---AGCGGT" data-align-initial="AGCGGT----">
+      <td class="umi-alignment-word-result"></td>
+    </tr>
+    <tr class="umi-alignment-translation">
+      <td colspan="3">-</td>
+      <td colspan="3">-</td>
+      <td colspan="3">-</td>
+      <td class="umi-alignment-translation-result"></td>
+    </tr>
+    <tr class="umi-alignment-row" data-align-expected="TGCAGAGGG" data-align-initial="TGCAGAGGG">
+      <td class="umi-alignment-word-result"></td>
+    </tr>
+    <tr class="umi-alignment-translation">
+      <td colspan="3">-</td>
+      <td colspan="3">-</td>
+      <td colspan="3">-</td>
+      <td class="umi-alignment-translation-result"></td>
+    </tr>
+    <tr class="umi-alignment-translation-results">
+      <td colspan="3">-</td>
+      <td colspan="3">-</td>
+      <td colspan="3">-</td>
+      <td class="umi-alignment-translation-general-result"></td>
+    </tr>
+  </table>
+
+  <div class="umi-alignment-card-results">
+    <span class="umi-alignment-card-result" ></span>
+  </div>
+</div>
+
 
 <script>
   umi.alignment.start();
