@@ -188,16 +188,12 @@ Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder i
 
 <p class='informative-text'>Hemos definido la <i>identidad</i> y hemos comenzado a entender las implicancias de introducir esos guiones, que de ahora en más llamaremos "gaps". La presencia de gaps, que introducen huecos en el alineamiento, representan las inserciones y deleciones. Y cómo pueden intuir, la apertura de un gap en una u otra posición o la persistencia de más de un gap en el alineamiento, tiene sus implicancias. </p>
 
-<p class='disparadores'>
- ☑️ PREGUNTAS DISPARADORAS: Pensando en un alineamiento de ácidos nucleicos, por ejemplo, ¿Cuáles te parece que son las implicancias de abrir un gap en el alineamiento? ¿Qué implicaría la inserción o deleción de una región de más de un residuo?
-</p>
-
 <p class='reto'> 👇 RETO III: En la siguiente tabla probá distintos alineamientos para las palabras "ANA" y "ANANA". Verás que en el margen superior izquierdo aparece un valor de identidad calculado para cada alineamitno que intentes y un botón para cambiar la penalidad que se le otorga a dicho para el cálculo de <i>identidad</i>.</p>
 
 <p class='reto'> Probá varias combinaciones, tomá nota de los valores de identidad observados y de las conclusiones que se desprendan de estas observaciones. </p>
 
 <p class='disparadores'>
- ☑️ PREGUNTAS DISPARADORAS:¿Cómo se relacionan los valores de identidad obtenidos con las penalizaciones que se imponen al gap? ¿Qué implicancias crees que tiene una mayor penalización de gaps? ¿Se te ocurre alguna otra forma de penalización que no haya sido tenido en cuenta en este ejemplo? 
+ ☑️ PREGUNTAS DISPARADORAS: ¿Cómo se relacionan los valores de identidad obtenidos con las penalizaciones que se imponen al gap? ¿Qué implicancias crees que tiene una mayor penalización de gaps? ¿Se te ocurre alguna otra forma de penalización que no haya sido tenido en cuenta en este ejemplo? 
 </p>
 
 <div class="umi-alignment-card">
@@ -228,33 +224,31 @@ Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder i
   </div>
 </div>
 
+<p class='informative-text'> Ahora que pudimos pensar en forma general las implicancias de abrir gaps en un alineamiento, situémonos nuevamente en el contexto biológico. Cómo bien sabemos, en 1958 Crick plantea el dogma central de la genética, donde establece que el flujo de información va del ADN al ARN, y de éste a las proteínas. La expresión génica, con sus pasos de transcripción y traducción, permite obtener proteínas a partir de la información codificada en el ADN. Sabemos, además, que el código genético consiste en 64 combinaciones de tripletes (codones) de nucleótiudos, que se corresponden con los distintos aminoácidos, y que guía la decodificacion del "mensaje" o "información" que aportan los genes para la síntesis de proteínas. </p>
+
+<p class='pensar'>
+👉 PARA PENSAR: Pensando en un alineamiento de ácidos nucleicos, por ejemplo, ¿Cuáles te parece que son las implicancias de abrir un gap en el alineamiento? ¿Qué implicaría la inserción o deleción de una región de más de un residuo?
+</p>
+
+<p class='informative-text'> </p>
+
 <p class='informative-text'>Otra forma de estimar el parecido entre dos secuencias pondera estas implicancias en la presencia de inserciones y deleciones que estuvimos evaluando, además de puntuaciones que ponderen los cambios de un caracter por otro de forma diferencial. ¿Por qué? Porque si hablamos de nucleótidos o aminoácidos estarán de acuerdo que no es indistinto cambiar uno por otro. Una mutación en un aminoácido puede, por ejemplo, generar un cambio drástico en la polaridad de una región de la proteína o implicar un cambio a nivel de su estructura secundaria. Por lo tanto, podríamos estimar la <i>similitud</i> que existe entre dos secuencias, como la suma de puntuaciones correspondientes a residuos en posiciones equivalentes en dos secuencias alineadas. Las tablas de puntuaciones de sustitución de un residuo por otro se denominan <i>matrices de sustitución</i>, y se construyen teniendo en cuenta los cambios observados en secuencias conocidas. </p>
 
 <p class='informative-text'> Margaret Dayhoff desarrolló las matrices PAM para aminoácidos, que se basan en las secuencias de proteínas que había compilado durante una década, publicadas como el Atlas de secuencia y estructura de proteínas (Dayhoff, 1978). 
 En las matrices PAM cada elemento de la matriz Mij cuantifica la probabilidad de que un aminoácido i sea reemplazado por otro aminoácido j en el intervalo evolutivo de 1 PAM (1 PAM se define como el intervalo evolutivo en que cambia un 1% de los aminoácidos en el alineamiento de 2 secuencias).Estas mutaciones se identificaron comparando secuencias muy similares con al menos un 85% de identidad, y se supone que cualquier sustitución observada fue el resultado de una única mutación entre la secuencia ancestral y una de las secuencias actuales.</p>
 
-<p><img src="pic_trulli.jpg"></img></p>
+<p><img src="pam1.png"></img>
+ <p class='informative-text'> Las matrices de sustitución se utilizan como parámetros de los algoritmos de alineamientos de secuencias proteicas, de forma de poder asignarle una puntuación a cada posible aliniamiento, y de este modo poder elegir el mejor. En el caso de los alineamientos de nucleótidos, suelen utilizarse un sistema de puntuación mucho más simple.</p></p>
+<h3 id="tipos-de-alineamientos"><strong>TIPOS DE ALINEAMIENTOS</strong></h3>
+<p><p class='informative-text'>
+Existen distintas herramientas para alinear secuencias, que podríamos clasificar en dos tipos: </p>
 <blockquote>
-<p>Consigna: Alineá "ANA" y "ANANA"</p>
+<ul>
+<li>Global: alineamiento de la secuencia completa. Es útil cuando se comparan secuencias muy similares en tamaño y composición, por ejemplo de dos genes muy conservados.</li>
+<li>Local: cuando sólo nos interesa alinear regiones similares entre secuencias. Se utiliza cuando las secuencias a comparar son diferentes en tamaño o poseen regiones no conservadas
+</p></li>
+</ul>
 </blockquote>
-<div class="umi-alignment-card">
-  <table class="umi-alignment-table" >
-    <tr class="umi-alignment-row"  data-align-expected="--ANA" data-align-initial="A-N-A">
-      <td class="umi-alignment-word-result"></td>
-    </tr>
-    <tr class="umi-alignment-row" data-align-expected="ANANA" data-align-initial="-">
-      <td class="umi-alignment-word-result"></td>
-    </tr>
-    <tr class="umi-alignment-results">
-      <td class="umi-alignment-general-result"></td>
-    </tr>
-  </table>
-
-  <div>
-    <span class="umi-alignment-card-result" ></span>
-  </div>
-</div>
-
 <script>
   umi.alignment.start();
 </script>
@@ -306,5 +300,5 @@ En las matrices PAM cada elemento de la matriz Mij cuantifica la probabilidad de
 
 <!--
 MkDocs version : 1.1.1
-Build Date UTC : 2020-05-14 14:47:13.309248+00:00
+Build Date UTC : 2020-05-14 16:52:23.105139+00:00
 -->
