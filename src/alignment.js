@@ -32,13 +32,17 @@ var umi = umi || {};
   // Generic Components Combiners
   // ============================
 
+  function findChild(component, klass) {
+    return component.$.find(klass);
+  }
+
   function onceAndOnChange(component, f) {
     component.onChange(f);
     f();
   }
 
   function aggregateResult(component, klass, f) {
-    let result = component.$.find(klass);
+    let result = findChild(component, klass);
     onceAndOnChange(component, () => {
       result.text(toCheck(f()));
     });
@@ -239,12 +243,12 @@ var umi = umi || {};
     }
 
     _initializeRows() {
-      this.$rows = this.$table.find(".umi-alignment-row").toArray().map(it => $(it));
+      this.$rows = findChild(this, ".umi-alignment-row").toArray().map(it => $(it));
       this.rows = this.$rows.map((it) => new AlignmentRow(it));
     }
 
     _initializeResults() {
-      let $results = findOrCreateCells('umi-alignment-result', this.$table.find('.umi-alignment-results'), this.length);
+      let $results = findOrCreateCells('umi-alignment-result', findChild(this, '.umi-alignment-results'), this.length);
 
       onceAndOnChange(this, () => {
         let results = checkAlignment(this.firstValue(), this.secondValue()).map(toCheck);
@@ -320,12 +324,12 @@ var umi = umi || {};
   class AlignmentCard {
     constructor($card) {
       this.$card = $card;
-      this.table = new AlignmentTable(this.$card.find('.umi-alignment-table'));
+      this.table = new AlignmentTable(findChild(this, '.umi-alignment-table'));
       this.identityCalculator = new IdentityCalculator(
-        this.$card.find('.umi-alignment-gap-penalty'),
-        this.$card.find('.umi-alignment-identity-level'),
+        findChild(this, '.umi-alignment-gap-penalty'),
+        findChild(this, '.umi-alignment-identity-level'),
       );
-      this.$status = this.$card.find('.umi-alignment-status');
+      this.$status = findChild(this, '.umi-alignment-status');
       this._initializeIdentityLevel();
     }
 
@@ -333,6 +337,10 @@ var umi = umi || {};
       onceAndOnChange(this.table, () => {
         this.identityCalculator.updateValues(this.table);
       });
+    }
+
+    get $() {
+      return this.$card;
     }
   }
 
