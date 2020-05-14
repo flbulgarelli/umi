@@ -15,7 +15,7 @@ Existen diferentes mecanismos que explican la biodiversidad, como las mutaciones
 Dos secuencias que comparten un ancestro común se denominan secuencias **homólogas** (Reeck et al., 1987). Aunque suele utilizarse muy frecuentemente de modo incorrecto, la homología es cualitativa. Las moléculas homólogas, u homólogos, se pueden dividir en dos clases: parálogos, que son homólogos que están presentes dentro de una especie y que suelen difierir en sus funciones bioquímicas detalladas; y ortólogos son homólogos que están presentes dentro de diferentes especies y tienen funciones muy similares o idénticas. Comprender la homología entre las moléculas puede revelar la historia evolutiva de las mismas, así como información sobre su función; Si una proteína recién secuenciada es homóloga a una proteína ya caracterizada, tenemos una fuerte indicación de la función bioquímica de la nueva proteína. La predicción de homologı́a se realiza extrayendo de las secuencias la información conservada durante la evolución, para lo que resulta necesario la comparación de las secuencias para identificar los residuos que tienen en común.
 </p>
 <p class='pensar'>
-👉 PARA PENSAR: ¿Qué tipo de información se puede extraer de la comparación de secuencias? ¿Cómo se evidenciaría en una comparación? 🤔
+👉 PARA PENSAR: ¿Qué tipo de información se puede extraer de la comparación de secuencias? ¿Cómo esperás que se vea en una comparación?  🤔
 </p>
 
 <p class='informative-text'>
@@ -23,7 +23,7 @@ Sin embargo, es importante tener en cuenta que con el tiempo dos genes pueden ac
 </p>
 
 <p class='pensar'>
-👉 PARA PENSAR: ¿Por qué crees que es mejor evaluar las relaciones evolutivas lejanas comparando proteínas, como dice el texto? 🤔
+👉 PARA PENSAR: ¿Por qué crees que es mejor evaluar las relaciones evolutivas lejanas comparando proteínas? 🤔
 </p>
 
 
@@ -38,7 +38,7 @@ Para comenzar a pensar sobre las complejidades que reviste este análisis comenc
 <p class='reto'> 👇 RETO I: Intentemos, entonces alinear estas dos palabras, para comprender mejor el problema. Alineá en la siguiente table de comparaciones las palabras "BANANA" y "MANZANA".</p>
 <p class='reto'> ¡Tomá nota de tus observaciones y de las conclusiones que se desprendan de estas observaciones! </p>
 <p class='disparadores'>
- ☑️ PREGUNTAS DISPARADORAS: ¿Existe una única forma de alinearlas? ¿Es alguno de los posibles alineamientos mejor que otro? Si así fuera ¿Por qué?
+ ☑️ PREGUNTAS DISPARADORAS: ¿Existe una única forma de alinearlas? ¿Es alguno de los posibles alineamientos mejor que otro? Si así fuera ¿Por qué? 
 </p>
 
 <div class="umi-alignment-card">
@@ -59,12 +59,49 @@ Para comenzar a pensar sobre las complejidades que reviste este análisis comenc
   </div>
 </div>
 
-
+<p class='disparadores'>
+ ☑️ PREGUNTAS DISPARADORAS: ¿Qué representan esos guiones?
+</p>
 
 <p class='informative-text'>
-Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder inferir relaciones evolutivas entre ellas y evaluar el parecido entre ellas. Sin embargo, poder evaluar el parecido entre dos secuencias pude collevar algunas dificultades. En primera instancia definamos un concepto que nos puede ser útil en este sentido, la <i>identidad</i>. Este se define como la suma de residuos idénticos en posiciones equivalentes en dos secuencias alineadas.
+Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder inferir relaciones evolutivas entre ellas y evaluar su parecido. Sin embargo, poder evaluar el parecido entre dos secuencias pude collevar algunas dificultades. En primera instancia definamos un concepto que nos puede ser útil en este sentido, la <i>identidad</i>. Este se define como la suma de residuos idénticos en posiciones equivalentes en dos secuencias alineadas.
 </p>
-<p class='reto'> 👇 RETO I: En la siguiente tabla probá distintos alineamientos para las palabras "ANA" y "ANANA". Verás que en el margen inferior izquierdo aparece un valor de identidad calculado para cada alineamitno que intentes. </p>
+<p class='reto'> 👇 RETO II: En la siguiente tabla probá distintos alineamientos para las palabras "ANA" y "ANANA". Verás que en el margen superior izquierdo aparece un valor de identidad calculado para cada alineamitno que intentes. </p>
+<p class='reto'> Tomá nota de los valores de identidad observados y de las conclusiones que se desprendan de estas observaciones. </p>
+<p class='disparadores'>
+ ☑️ PREGUNTAS DISPARADORAS: ¿Son todos los valores iguales? ¿Qué consideraciones deberían tenerse en cuenta a la hora de realizar el cálculo? ¿Se te ocurre, distintas formas de calcularlo? ¿Serán todas ellas igualmente válidas en Biología?
+</p>
+
+<div class="umi-alignment-card">
+  <div>
+    <label for="umi-alignment-identity-level-1">Identidad</label>
+    <span id="umi-alignment-identity-level-1" class="umi-alignment-identity-level"></span>
+  </div>
+
+  <table class="umi-alignment-table">
+    <tr class="umi-alignment-row"  data-align-expected="--ANA">
+      <td class="umi-alignment-word-result"></td>
+    </tr>
+    <tr class="umi-alignment-row" data-align-expected="ANANA">
+      <td class="umi-alignment-word-result"></td>
+    </tr>
+    <tr class="umi-alignment-results">
+      <td class="umi-alignment-general-result"></td>
+    </tr>
+  </table>
+
+  <div>
+    <span class="umi-alignment-card-result"></span>
+  </div>
+</div>
+
+<p class='informative-text'>Hemos definido la <i>identidad</i> y hemos comenzado a entender las implicancias de introducir esos guiones, que de ahora en más llamaremos "gaps". La presencia de gaps, que introducen huecos en el alineamiento, representan las inserciones y deleciones. Y cómo pueden intuir, la apertura de un gap en una u otra posición o la persistencia de más de un gap en el alineamiento, tiene sus implicancias. </p>
+
+<p class='disparadores'>
+ ☑️ PREGUNTAS DISPARADORAS: Pensando en un alineamiento de ácidos nucleicos, por ejemplo, ¿Cuáles te parece que son las implicancias de abrir un gap en el alineamiento? ¿Qué implicaría la inserción o deleción de una región de más de un residuo?
+</p>
+
+<p class='reto'> 👇 RETO II: En la siguiente tabla probá distintos alineamientos para las palabras "ANA" y "ANANA". Verás que en el margen superior izquierdo aparece un valor de identidad calculado para cada alineamitno que intentes. </p>
 <p class='reto'> Tomá nota de los valores de identidad observados y de las conclusiones que se desprendan de estas observaciones. </p>
 <p class='disparadores'>
  ☑️ PREGUNTAS DISPARADORAS: ¿Son todos los valores iguales? ¿Qué consideraciones deberían tenerse en cuenta a la hora de realizar el cálculo? ¿Se te ocurre, distintas formas de calcularlo? ¿Serán todas ellas igualmente válidas en Biología?
@@ -98,8 +135,8 @@ Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder i
   </div>
 </div>
 
-
 <p class='informative-text'>La similitud es la suma de puntuaciones correspondientes a residuos en posiciones equivalentes en dos secuencias alineadas, dichas puntuaciones suelen estar tabuladas e incluir penalizaciones para las inserciones y deleciones (también llamados gaps, porque insertan huecos en el alineamiento)</p>
+
 
 >  Consigna: Alineá "ANA" y "ANANA"
 
