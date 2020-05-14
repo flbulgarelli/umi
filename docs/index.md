@@ -77,7 +77,7 @@ Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder i
   <div class="umi-alignment-inputs">
     <div class="umi-alignment-input">
       <label for="umi-alignment-gap-penalty-1">Penalidad</label>
-      <input id="umi-alignment-gap-penalty-1" class="umi-alignment-gap-penalty" type="number" min="0" value="1">
+      <input id="umi-alignment-gap-penalty-1" class="umi-alignment-gap-penalty" type="number" min="0" value="0">
     </div>
     <div class="umi-alignment-input">
       <label for="umi-alignment-identity-level-1">Identidad</label>
@@ -112,14 +112,15 @@ Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder i
 </p>
 
 <div class="umi-alignment-card">
-  <div>
-    <label for="umi-alignment-gap-penalty-1">Penalidad</label>
-    <input id="umi-alignment-gap-penalty-1" class="umi-alignment-gap-penalty" type="number" min="0" value="1">
-  </div>
-
-  <div>
-    <label for="umi-alignment-identity-level-1">Identidad</label>
-    <span id="umi-alignment-identity-level-1" class="umi-alignment-identity-level"></span>
+  <div class="umi-alignment-inputs">
+    <div class="umi-alignment-input">
+      <label for="umi-alignment-gap-penalty-1">Penalidad</label>
+      <input id="umi-alignment-gap-penalty-1" class="umi-alignment-gap-penalty" type="number" min="0" value="1">
+    </div>
+    <div class="umi-alignment-input">
+      <label for="umi-alignment-identity-level-1">Identidad</label>
+      <span id="umi-alignment-identity-level-1" class="umi-alignment-identity-level"></span>
+    </div>
   </div>
 
   <table class="umi-alignment-table">
@@ -134,7 +135,7 @@ Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder i
     </tr>
   </table>
 
-  <div>
+  <div class="umi-alignment-card-results">
     <span class="umi-alignment-card-result"></span>
   </div>
 </div>
