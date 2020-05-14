@@ -156,10 +156,6 @@ var umi = umi || {};
       }
     }
 
-    get $() {
-      return this.$row;
-    }
-
     value() {
       return this.$row.text().replace(/[\n ]/g, '');
     }
@@ -220,10 +216,6 @@ var umi = umi || {};
 
     onChange(f) {
       this.rows.forEach(row => row.onChange(function (_) { f(this) }.bind(this)));
-    }
-
-    get $() {
-      return this.$table;
     }
 
     values() {
