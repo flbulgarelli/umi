@@ -37,6 +37,13 @@ var umi = umi || {};
     f();
   }
 
+  function aggregateResult(component, klass, f) {
+    let result = component.$.find(klass);
+    onceAndOnChange(component, () => {
+      result.text(toCheck(f()));
+    });
+  }
+
   // ====================
   // Generic UI Renderers
   // ====================
@@ -161,14 +168,15 @@ var umi = umi || {};
     }
 
     _initializeWordResult() {
-      this.$wordResult = this.$row.find('.umi-alignment-word-result');
-      onceAndOnChange(this, () => {
-        this.$wordResult.text(toCheck(this.isExpectedWord()));
-      });
+      aggregateResult(this, '.umi-alignment-word-result', () => this.isExpectedWord());
     }
 
     onChange(f) {
       this.$row.on('input', function (e) { f(this) }.bind(this));
+    }
+
+    get $() {
+      return this.$row;
     }
 
     get length() {
@@ -227,6 +235,7 @@ var umi = umi || {};
       this.$table = $table;
       this._initializeRows();
       this._initializeResults();
+      this._initializeGeneralResults();
     }
 
     _initializeRows() {
@@ -243,8 +252,16 @@ var umi = umi || {};
       })
     }
 
+    _initializeGeneralResults() {
+      aggregateResult(this, '.umi-alignment-general-result', () => this.isExpected());
+    }
+
     onChange(f) {
       this.rows.forEach(row => row.onChange(function (_) { f(this) }.bind(this)));
+    }
+
+    get $() {
+      return this.$table;
     }
 
     get length() {
@@ -303,12 +320,12 @@ var umi = umi || {};
   class AlignmentCard {
     constructor($card) {
       this.$card = $card;
-      this.table = new AlignmentTable($card.find('.umi-alignment-table'));
+      this.table = new AlignmentTable(this.$card.find('.umi-alignment-table'));
       this.identityCalculator = new IdentityCalculator(
-        $card.find('.umi-alignment-gap-penalty'),
-        $card.find('.umi-alignment-identity-level'),
+        this.$card.find('.umi-alignment-gap-penalty'),
+        this.$card.find('.umi-alignment-identity-level'),
       );
-      this.$status = $card.find('.umi-alignment-status');
+      this.$status = this.$card.find('.umi-alignment-status');
       this._initializeIdentityLevel();
     }
 

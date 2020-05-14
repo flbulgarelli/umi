@@ -104,7 +104,12 @@ Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder i
       <td class="umi-alignment-general-result"></td>
     </tr>
   </table>
+
+  <div>
+    <span class="umi-alignment-card-result" ></span>
+  </div>
 </div>
+
 <script>
   umi.alignment.start();
 </script>
