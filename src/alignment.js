@@ -1,5 +1,9 @@
 var umi = umi || {};
 ((umi) => {
+  // =====================
+  // Generic Bio functions
+  // =====================
+
   function identity(x, y, gapPenalty = 0) {
     let matches = 0;
     let length = Math.min(x.length, y.length)
@@ -24,12 +28,34 @@ var umi = umi || {};
     return results;
   }
 
+  // ====================
+  // Generic UI Renderers
+  // ====================
+
+  function findOrCreateCells(klass, parent, count) {
+    let cells = () => parent.find(`.${klass}`);
+    let $cells = cells();
+    if ($cells.length === 0) {
+      for (let i = 0; i < count; i++) {
+        parent.append(`<td class="${klass}"></td>`)
+      }
+      return cells();
+    } else {
+      return $cells;
+    }
+  }
+
   function fillValues(values, $values, defaultValue) {
     $values.each((index, it) => {
       let $value = $(it);
       $value.text(values[index] || defaultValue);
     });
   }
+
+  // ==============
+  // Bio Components
+  // ==============
+
 
   class Sequence {
     constructor(value) {
@@ -85,6 +111,10 @@ var umi = umi || {};
       TGT: 'C', TAA: 'STOP', TAG: 'STOP', TGA: 'STOP'
   }
 
+  // =============
+  // UI Components
+  // =============
+
   class AlignmentRow {
     constructor($row) {
       this.$row = $row;
@@ -111,23 +141,10 @@ var umi = umi || {};
 
     _initializeCells() {
       let initial = this.initial();
-      let $cells = this._findOrCreateCells();
+      let $cells = findOrCreateCells('umi-alignment-cell', this.$row, this.length);
 
       fillValues(initial, $cells, '-');
       $cells.each((index, it) => $(it).attr('contenteditable', true) );
-    }
-
-    _findOrCreateCells() {
-      let cells = () => this.$row.find('.umi-alignment-cell');
-      let $cells = cells();
-      if ($cells.length === 0) {
-        for (let i = 0; i < this.length; i++) {
-          this.$row.append('<td class="umi-alignment-cell"></td>')
-        }
-        return cells();
-      } else {
-        return $cells;
-      }
     }
 
     onChange(f) {
@@ -202,7 +219,8 @@ var umi = umi || {};
     }
 
     _initializeResults() {
-      let $results = this.$table.find('.umi-alignment-result');
+      let $results = findOrCreateCells('umi-alignment-result', this.$table.find('.umi-alignment-results'), this.length);
+
       this.onceAndOnChange(() => {
         let results = checkAlignment(this.firstValue(), this.secondValue()).map(it => it ? '✅' : '❎');
         fillValues(results, $results);
@@ -216,6 +234,10 @@ var umi = umi || {};
 
     onChange(f) {
       this.rows.forEach(row => row.onChange(function (_) { f(this) }.bind(this)));
+    }
+
+    get length() {
+      return this.rows[0].length;
     }
 
     values() {
@@ -290,6 +312,10 @@ var umi = umi || {};
     }
   }
 
+  // ===========
+  // Entry Point
+  // ===========
+
   function start() {
     $(() => {
       umi.alignment.cards = [];
@@ -298,6 +324,8 @@ var umi = umi || {};
       })
     })
   }
+
+
   umi.alignment = {
     AlignmentTable,
     AlignmentRow,
