@@ -1,5 +1,9 @@
 var umi = umi || {};
 ((umi) => {
+  // =====================
+  // Generic Bio functions
+  // =====================
+
   function identity(x, y, gapPenalty = 0) {
     let matches = 0;
     let length = Math.min(x.length, y.length)
@@ -24,18 +28,44 @@ var umi = umi || {};
     return results;
   }
 
-  function setupUmiStyles(element) {
-    updateUmiStyles(element);
-    element.onChange(updateUmiStyles);
+  // ============================
+  // Generic Components Combiners
+  // ============================
+
+  function findChild(component, klass) {
+    return component.$.find(klass);
   }
 
-  function updateUmiStyles(element) {
-    if (element.isOk()) {
-      element.$.addClass('umi-ok');
-      element.$.removeClass('umi-nok');
+  function onceAndOnChange(component, f) {
+    component.onChange(f);
+    f();
+  }
+
+  function aggregateResult(component, klass, f) {
+    let result = findChild(component, klass);
+    onceAndOnChange(component, () => {
+      result.text(toCheck(f()));
+    });
+  }
+
+  // ====================
+  // Generic UI Renderers
+  // ====================
+
+  function toCheck(value) {
+    return value ? '✅' : '❎';
+  }
+
+  function findOrCreateCells(klass, parent, count) {
+    let cells = () => parent.find(`.${klass}`);
+    let $cells = cells();
+    if ($cells.length === 0) {
+      for (let i = 0; i < count; i++) {
+        parent.prepend(`<td class="${klass}"></td>`)
+      }
+      return cells();
     } else {
-      element.$.removeClass('umi-ok');
-      element.$.addClass('umi-nok');
+      return $cells;
     }
   }
 
@@ -46,12 +76,75 @@ var umi = umi || {};
     });
   }
 
+  // ==============
+  // Bio Components
+  // ==============
+
+
+  class Sequence {
+    constructor(value) {
+      this.value = value;
+    }
+
+    get length() {
+      return this.value.length;
+    }
+
+    word() {
+      return this.value.replace(/-/g, '');
+    }
+
+    codons() {
+      if (!this.value) {
+        return [];
+      }
+      let codons = [];
+      let lastIndex = -1;
+      for (let i = 0; i < this.length; i++) {
+        if (i % 3 === 0) {
+          lastIndex++;
+          codons[lastIndex] = '';
+        }
+        codons[lastIndex] = codons[lastIndex] + this.value[i];
+
+      }
+      return codons;
+    }
+
+    translations() {
+      return this.codons().map(codon => Sequence.TRANSLATIONS[codon]);
+    }
+  }
+
+  Sequence.TRANSLATIONS = {
+      ATA: 'I', ATC: 'I', ATT: 'I', ATG: 'M',
+      ACA: 'T', ACC: 'T', ACG: 'T', ACT: 'T',
+      AAC: 'N', AAT: 'N', AAA: 'K', AAG: 'K',
+      AGC: 'S', AGT: 'S', AGA: 'R', AGG: 'R',
+      CTA: 'L', CTC: 'L', CTG: 'L', CTT: 'L',
+      CCA: 'P', CCC: 'P', CCG: 'P', CCT: 'P',
+      CAC: 'H', CAT: 'H', CAA: 'Q', CAG: 'Q',
+      CGA: 'R', CGC: 'R', CGG: 'R', CGT: 'R',
+      GTA: 'V', GTC: 'V', GTG: 'V', GTT: 'V',
+      GCA: 'A', GCC: 'A', GCG: 'A', GCT: 'A',
+      GAC: 'D', GAT: 'D', GAA: 'E', GAG: 'E',
+      GGA: 'G', GGC: 'G', GGG: 'G', GGT: 'G',
+      TCA: 'S', TCC: 'S', TCG: 'S', TCT: 'S',
+      TTC: 'F', TTT: 'F', TTA: 'L', TTG: 'L',
+      TAC: 'Y', TAT: 'Y', TGG: 'W', TGC: 'C',
+      TGT: 'C', TAA: 'STOP', TAG: 'STOP', TGA: 'STOP'
+  }
+
+  // =============
+  // UI Components
+  // =============
+
   class AlignmentRow {
     constructor($row) {
       this.$row = $row;
       this._initializeKeydown();
       this._initializeCells();
-      setupUmiStyles(this)
+      this._initializeWordResult();
     }
 
     _initializeKeydown() {
@@ -72,28 +165,22 @@ var umi = umi || {};
     }
 
     _initializeCells() {
-      let initial = this.initial();
-      let $cells = this._findOrCreateCells();
+      this.$cells = findOrCreateCells('umi-alignment-cell', this.$row, this.length);
 
-      fillValues(initial, $cells, '-');
-      $cells.each((index, it) => $(it).attr('contenteditable', true) );
+      fillValues(this.initial(), this.$cells, '-');
+      this.$cells.each((index, it) => $(it).attr('contenteditable', true) );
     }
 
-    _findOrCreateCells() {
-      let cells = () => this.$row.find('.umi-alignment-cell');
-      let $cells = cells();
-      if ($cells.length === 0) {
-        for (let i = 0; i < this.length; i++) {
-          this.$row.append('<td class="umi-alignment-cell"></td>')
-        }
-        return cells();
-      } else {
-        return $cells;
-      }
+    _initializeWordResult() {
+      aggregateResult(this, '.umi-alignment-word-result', () => this.isExpectedWord());
     }
 
     onChange(f) {
       this.$row.on('input', function (e) { f(this) }.bind(this));
+    }
+
+    get $() {
+      return this.$row;
     }
 
     get length() {
@@ -118,12 +205,8 @@ var umi = umi || {};
       }
     }
 
-    get $() {
-      return this.$row;
-    }
-
     value() {
-      return this.$row.text().replace(/[\n ]/g, '');
+      return this.$cells.text().replace(/[\n ]/g, '');
     }
 
     word() {
@@ -146,12 +229,8 @@ var umi = umi || {};
       return this.word() === this.expectedWord();
     }
 
-    isOk() {
-      return this.isExpectedWord();
-    }
-
     _wordOf(value) {
-      return value.replace(/-/g, '')
+      return new Sequence(value).word();
     }
   }
 
@@ -160,33 +239,25 @@ var umi = umi || {};
       this.$table = $table;
       this._initializeRows();
       this._initializeResults();
-      this._initializeIdentityLevel();
-      setupUmiStyles(this);
+      this._initializeGeneralResults();
     }
 
     _initializeRows() {
-      this.$rows = this.$table.find(".umi-alignment-row").toArray().map(it => $(it));
+      this.$rows = findChild(this, ".umi-alignment-row").toArray().map(it => $(it));
       this.rows = this.$rows.map((it) => new AlignmentRow(it));
     }
 
     _initializeResults() {
-      let $results = this.$table.find('.umi-alignment-result');
-      let updateResults = () => {
-        let results = checkAlignment(this.rows[0].value(), this.rows[1].value()).map(it => it ? '✅' : '❎');
+      let $results = findOrCreateCells('umi-alignment-result', findChild(this, '.umi-alignment-results'), this.length);
+
+      onceAndOnChange(this, () => {
+        let results = checkAlignment(this.firstValue(), this.secondValue()).map(toCheck);
         fillValues(results, $results);
-      };
-      this.onChange(updateResults)
-      updateResults();
+      })
     }
 
-    _initializeIdentityLevel() {
-      let $level = this.$table.find('.umi-alignment-identity-level');
-      let update = () => {
-        let result = identity(this.rows[0].value(), this.rows[1].value())
-        $level.text(result);
-      };
-      this.onChange(update)
-      update();
+    _initializeGeneralResults() {
+      aggregateResult(this, '.umi-alignment-general-result', () => this.isExpected());
     }
 
     onChange(f) {
@@ -197,30 +268,100 @@ var umi = umi || {};
       return this.$table;
     }
 
+    get length() {
+      return this.rows[0].length;
+    }
+
     values() {
       return this.rows.map(it => it.value());
+    }
+
+    firstValue() {
+      return this.rows[0].value();
+    }
+
+    secondValue() {
+      return this.rows[1].value();
     }
 
     isExpected() {
       return this.rows.every((it) => it.isExpected());
     }
+  }
 
-    isOk() {
-      return this.isExpected();
+  class IdentityCalculator {
+    constructor($gapPenalty, $identityLevel) {
+      this.$gapPenalty = $gapPenalty;
+      this.$identityLevel = $identityLevel;
+      this._initializeGapPenalty();
+    }
+
+    _initializeGapPenalty() {
+      this.$gapPenalty.change(function () {
+        this._eval();
+      }.bind(this));
+    }
+
+    updateValues(table) {
+      this.first = table.firstValue();
+      this.second = table.secondValue();
+      this._eval();
+    }
+
+    gapPenalty() {
+      return this.$gapPenalty.val();
+    }
+
+    identityLevel() {
+      return identity(this.first, this.second, this.gapPenalty());
+    }
+
+    _eval() {
+      this.$identityLevel.text(this.identityLevel());
     }
   }
 
+  class AlignmentCard {
+    constructor($card) {
+      this.$card = $card;
+      this.table = new AlignmentTable(findChild(this, '.umi-alignment-table'));
+      this.identityCalculator = new IdentityCalculator(
+        findChild(this, '.umi-alignment-gap-penalty'),
+        findChild(this, '.umi-alignment-identity-level'),
+      );
+      this.$status = findChild(this, '.umi-alignment-status');
+      this._initializeIdentityLevel();
+    }
+
+    _initializeIdentityLevel() {
+      onceAndOnChange(this.table, () => {
+        this.identityCalculator.updateValues(this.table);
+      });
+    }
+
+    get $() {
+      return this.$card;
+    }
+  }
+
+  // ===========
+  // Entry Point
+  // ===========
+
   function start() {
     $(() => {
-      umi.alignment.tables = [];
-      $(".umi-alignment-table").each((_index, table) => {
-        umi.alignment.tables.push(new AlignmentTable($(table)));
+      umi.alignment.cards = [];
+      $(".umi-alignment-card").each((_index, card) => {
+        umi.alignment.cards.push(new AlignmentCard($(card)));
       })
     })
   }
+
+
   umi.alignment = {
     AlignmentTable,
     AlignmentRow,
+    Sequence,
     start,
     checkAlignment,
     identity,
