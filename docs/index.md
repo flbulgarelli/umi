@@ -94,14 +94,19 @@ Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder i
 
 <div class="umi-alignment-card">
   <table class="umi-alignment-table" >
-    <tr class="umi-alignment-row"  data-align-expected="--ANA" data-align-initial="A-N-A"></tr>
-    <tr class="umi-alignment-row" data-align-expected="ANANA" data-align-initial="-"></tr>
+    <tr class="umi-alignment-row"  data-align-expected="--ANA" data-align-initial="A-N-A">
+      <td class="umi-alignment-word-result"></td>
+    </tr>
+    <tr class="umi-alignment-row" data-align-expected="ANANA" data-align-initial="-">
+      <td class="umi-alignment-word-result"></td>
+    </tr>
     <tr class="umi-alignment-results">
         <td class="umi-alignment-result"></td>
         <td class="umi-alignment-result"></td>
         <td class="umi-alignment-result"></td>
         <td class="umi-alignment-result"></td>
         <td class="umi-alignment-result"></td>
+        <td class="umi-alignment-general-result"></td>
     </tr>
   </table>
 </div>
