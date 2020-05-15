@@ -123,7 +123,7 @@ var umi = umi || {};
     }
 
     translations() {
-      return this.codons().map(codon => Sequence.TRANSLATIONS[codon]);
+      return this.codons().map(codon => Sequence.TRANSLATIONS[codon] || '-');
     }
   }
 
