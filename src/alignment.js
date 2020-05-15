@@ -54,6 +54,11 @@ var umi = umi || {};
     component.eval();
   }
 
+  function evalWithUpdatedValue(component, value) {
+    component.value = value;
+    component.eval();
+  }
+
   // ====================
   // Generic UI Renderers
   // ====================
@@ -62,7 +67,7 @@ var umi = umi || {};
     return value ? '✅' : '❎';
   }
 
-  function findOrCreateCells(component, klass) {
+  function findOrCreateCells(component, klass, colspan) {
     let cells = () => findChild(component, `.${klass}`);
     let $cells = cells();
     if ($cells.length === 0) {
@@ -289,22 +294,14 @@ var umi = umi || {};
     }
   }
 
-  class AlignmentChecker {
-    constructor($results, length) {
+  class ResultsDisplay {
+    constructor($results) {
       this.$results = $results;
-      this.length = length;
       this._listeners = [];
-      this._initializeResults();
-      this._initializeGeneralResults();
-
     }
 
-    _initializeResults() {
-      this.$cells = findOrCreateCells(this, 'umi-alignment-result');
-    }
-
-    _initializeGeneralResults() {
-      aggregateResult(this, '.umi-alignment-general-result', () => this.isExpected());
+    get $() {
+      return this.$results;
     }
 
     _notifyChange() {
@@ -315,8 +312,25 @@ var umi = umi || {};
       this._listeners.push(f);
     }
 
-    get $() {
-      return this.$results;
+    isExpected() {
+      return this.results && this.results.every(it => it);
+    }
+  }
+
+  class AlignmentChecker extends ResultsDisplay {
+    constructor($results, length) {
+      super($results);
+      this.length = length;
+      this._initializeResults();
+      this._initializeGeneralResults();
+    }
+
+    _initializeResults() {
+      this.$cells = findOrCreateCells(this, 'umi-alignment-result');
+    }
+
+    _initializeGeneralResults() {
+      aggregateResult(this, '.umi-alignment-general-result', () => this.isExpected());
     }
 
     isExpected() {
@@ -331,7 +345,36 @@ var umi = umi || {};
       }
       fillValues(this.results.map(toCheck), this.$cells);
     }
+  }
 
+  class CodonTranslator extends ResultsDisplay {
+    constructor($results, sequenceLength) {
+      super($results);
+      this.sequenceLength = sequenceLength;
+      this._initializeResults();
+      this._initializeGeneralResults();
+    }
+
+    _initializeResults() {
+      this.$cells = findOrCreateCells(this, 'umi-alignment-translation-result', 3);
+    }
+
+    _initializeGeneralResults() {
+      aggregateResult(this, '.umi-alignment-translation-general-result', () => this.isExpected());
+    }
+
+    get length() {
+      return  this.sequenceLength / 3
+    }
+
+    eval() {
+      const old = this.results;
+      this.results = new Sequence(this.value).translations();
+      if (old !== this.results) {
+        this._notifyChange();
+      }
+      fillValues(this.results, this.$cells);
+    }
   }
 
   class IdentityCalculator {
