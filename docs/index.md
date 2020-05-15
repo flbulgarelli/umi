@@ -230,9 +230,9 @@ Existen distintas herramientas para alinear secuencias, que podríamos clasifica
 </p>
 <p class='informative-text'> Asimismo existen herramientas que permiten tanto comparaciones de secuencias de a pares y o realizar alineamientos múltiples:
 
-- A pares de secuencias: mide la similitud entre dos secuencias.
+> - A pares de secuencias: mide la similitud entre dos secuencias.
 
--  Alineamiento múltiple: compara más de dos secuencias al mismo tiempo.
+> - Alineamiento múltiple: compara más de dos secuencias al mismo tiempo. 
 
 En ambos casos el alineamiento puede ser local o global, lo que supondrá algunas limitaciones de uso para cada caso.
 </p>
