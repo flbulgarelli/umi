@@ -316,15 +316,11 @@ var umi = umi || {};
     }
 
     _notifyChange() {
-      this._listeners.forEach(listener =>listener());
+      this._listeners.forEach(listener => listener());
     }
 
     onChange(f) {
       this._listeners.push(f);
-    }
-
-    isExpected() {
-      return this.results && this.results.every(it => it);
     }
   }
 
@@ -376,6 +372,18 @@ var umi = umi || {};
 
     get length() {
       return  this.sequenceLength / 3
+    }
+
+    expected() {
+      return this.$results.data('translationExpected');
+    }
+
+    result() {
+      return this.results ? this.results.join('') : '';
+    }
+
+    isExpected() {
+      return this.result() === this.expected();
     }
 
     eval() {

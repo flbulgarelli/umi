@@ -178,13 +178,13 @@ Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder i
     <tr class="umi-alignment-row"  data-align-expected="---AGCGGT" data-align-initial="AGCGGT----">
       <td class="umi-alignment-word-result"></td>
     </tr>
-    <tr class="umi-alignment-translations">
+    <tr class="umi-alignment-translations" data-translation-expected="SG-">
       <td class="umi-alignment-translations-result"></td>
     </tr>
     <tr class="umi-alignment-row" data-align-expected="TGCAGAGGG" data-align-initial="TGCAGAGGG">
       <td class="umi-alignment-word-result"></td>
     </tr>
-    <tr class="umi-alignment-translations">
+    <tr class="umi-alignment-translations" data-translation-expected="CRG">
       <td class="umi-alignment-translations-result"></td>
     </tr>
     <tr class="umi-alignment-translation-results">
