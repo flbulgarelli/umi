@@ -67,12 +67,12 @@ var umi = umi || {};
     return value ? '✅' : '❎';
   }
 
-  function findOrCreateCells(component, klass, colspan) {
+  function findOrCreateCells(component, klass, colspan = 1) {
     let cells = () => findChild(component, `.${klass}`);
     let $cells = cells();
     if ($cells.length === 0) {
       for (let i = 0; i < component.length; i++) {
-        component.$.prepend(`<td class="${klass}"></td>`)
+        component.$.prepend(`<td colspan="${colspan}" class="${klass}"></td>`)
       }
       return cells();
     } else {
@@ -250,6 +250,7 @@ var umi = umi || {};
       this.$table = $table;
       this._initializeRows();
       this._initializeAligmentChecker();
+      this._initializeCodonTranslators();
     }
 
     _initializeRows() {
@@ -262,6 +263,16 @@ var umi = umi || {};
 
       onceAndOnChange(this, () => {
         evalWithUpdatedValues(this.alignmentChecker, this);
+      });
+    }
+
+    _initializeCodonTranslators() {
+      this.translators = findChild(this, '.umi-alignment-translations').map((index, it) => {
+        const translator = new CodonTranslator($(it), this.length);
+        onceAndOnChange(this, () => {
+          evalWithUpdatedValue(translator, this.rows[index].value());
+        });
+        return translator;
       });
     }
 
@@ -356,11 +367,11 @@ var umi = umi || {};
     }
 
     _initializeResults() {
-      this.$cells = findOrCreateCells(this, 'umi-alignment-translation-result', 3);
+      this.$cells = findOrCreateCells(this, 'umi-alignment-translation', 3);
     }
 
     _initializeGeneralResults() {
-      aggregateResult(this, '.umi-alignment-translation-general-result', () => this.isExpected());
+      aggregateResult(this, '.umi-alignment-translations-result', () => this.isExpected());
     }
 
     get length() {
