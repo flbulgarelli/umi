@@ -217,20 +217,23 @@ En las matrices PAM cada elemento de la matriz Mij cuantifica la probabilidad de
  👀 ¡Es importante tener en cuenta, que una significación estadı́stica no garantiza certeza!
 
 ### **TIPOS DE ALINEAMIENTOS**
+
 <p class='informative-text'>
 Existen distintas herramientas para alinear secuencias, que podríamos clasificar en dos tipos:
-
-> - Global: alineamiento de la secuencia completa. Es útil cuando se comparan secuencias muy similares en tamaño y composición, por ejemplo de dos genes muy conservados.
-> - Local: cuando sólo nos interesa alinear regiones similares entre secuencias. Se utiliza cuando las secuencias a comparar son diferentes en tamaño o poseen regiones no conservadas
+  <ul>
+    <li>-  Global: alineamiento de la secuencia completa. Es útil cuando se comparan secuencias muy similares en tamaño y composición, por ejemplo de dos genes muy conservados.</li>
+    <li>-  Local: cuando sólo nos interesa alinear regiones similares entre secuencias. Se utiliza cuando las secuencias a comparar son diferentes en tamaño o poseen regiones no conservadas</li>
+  </ul>
 </p>
 
 <p class='informative-text'> Un de los más importantes algoritmos para encontrar alineamientos globales es el de Needleman-Wunsch. Este es un ejemplo de algoritmo de programación dinámica, que subdivide los problemas de cálculo, asegurando encontrar la solución óptima para 2 secuencias dadas. Este utiliza una matriz cuadrada para asignar puntuación para los distintos alineamientos posibles, dada una puntuación para matches, mismatches y gaps; y luego retrocediendo a lo largo de la mejor alineación posible (de mayor puntuación).
 </p>
 <p class='informative-text'> Asimismo existen herramientas que permiten tanto comparaciones de secuencias de a pares y o realizar alineamientos múltiples:
 
-> - A pares de secuencias: mide la similitud entre dos secuencias.
-
-> - Alineamiento múltiple: compara más de dos secuencias al mismo tiempo. 
+<ul>
+  <li>-  A pares de secuencias: mide la similitud entre dos secuencias.</li>
+  <li>-  Alineamiento múltiple: compara más de dos secuencias al mismo tiempo.</li>
+</ul>
 
 En ambos casos el alineamiento puede ser local o global, lo que supondrá algunas limitaciones de uso para cada caso.
 </p>
