@@ -164,7 +164,8 @@ Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder i
       <input id="umi-alignment-gap-penalty-2" class="umi-alignment-gap-penalty" type="number" min="0" value="0">
     </div>
 
-    <div class="umi-alignment-input">
+
+  <div class="umi-alignment-input">
       <label for="umi-alignment-identity-level-2">Identidad</label>
       <span id="umi-alignment-identity-level-2" class="umi-alignment-identity-level"></span>
     </div>
