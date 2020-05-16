@@ -188,10 +188,7 @@ Ahora bien, como bien dijimos el objetivo de alinear secuencias es el de poder i
       <td class="umi-alignment-translations-result"></td>
     </tr>
     <tr class="umi-alignment-translation-results">
-      <td colspan="3">-</td>
-      <td colspan="3">-</td>
-      <td colspan="3">-</td>
-      <td class="umi-alignment-translation-general-result"></td>
+      <td class="umi-alignment-general-result"></td>
     </tr>
   </table>
 

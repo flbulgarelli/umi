@@ -251,6 +251,7 @@ var umi = umi || {};
       this._initializeRows();
       this._initializeAligmentChecker();
       this._initializeCodonTranslators();
+      this._initializeCodonTranslatorAlignmentChecker();
     }
 
     _initializeRows() {
@@ -260,7 +261,6 @@ var umi = umi || {};
 
     _initializeAligmentChecker() {
       this.alignmentChecker = new AlignmentChecker(findChild(this, '.umi-alignment-results'), this.length);
-
       onceAndOnChange(this, () => {
         evalWithUpdatedValues(this.alignmentChecker, this);
       });
@@ -274,6 +274,15 @@ var umi = umi || {};
         });
         return translator;
       });
+    }
+
+    _initializeCodonTranslatorAlignmentChecker() {
+      if (this.translators.length) {
+        this.translationAlignmentChecker = new TranslationAlignmentChecker(findChild(this, '.umi-alignment-translation-results'), this.length);
+        onceAndOnChange(this, () => {
+          evalWithUpdatedValues(this.translationAlignmentChecker, this.translations);
+        });
+      }
     }
 
     onChange(f) {
@@ -300,6 +309,13 @@ var umi = umi || {};
       return this.rows[1].value();
     }
 
+    get translations() {
+      return {
+        firstValue: () => this.translators[0].result(),
+        secondValue: () => this.translators[1].result()
+      }
+    }
+
     isExpected() {
       return this.rows.every((it) => it.isExpected());
     }
@@ -322,18 +338,35 @@ var umi = umi || {};
     onChange(f) {
       this._listeners.push(f);
     }
+
+    eval() {
+      const old = this.results;
+      this.results = this._results();
+      if (old !== this.results) {
+        this._notifyChange();
+      }
+      this._renderResults();
+    }
   }
 
   class AlignmentChecker extends ResultsDisplay {
-    constructor($results, length) {
+    constructor($results, sequenceLength) {
       super($results);
-      this.length = length;
+      this.sequenceLength = sequenceLength;
       this._initializeResults();
       this._initializeGeneralResults();
     }
 
     _initializeResults() {
-      this.$cells = findOrCreateCells(this, 'umi-alignment-result');
+      this.$cells = findOrCreateCells(this, 'umi-alignment-result', this.colspan);
+    }
+
+    get length() {
+      return this.sequenceLength;
+    }
+
+    get colspan() {
+      return 1;
     }
 
     _initializeGeneralResults() {
@@ -344,14 +377,28 @@ var umi = umi || {};
       return this.results && this.results.every(it => it);
     }
 
-    eval() {
-      const old = this.results;
-      this.results = checkAlignment(this.firstValue, this.secondValue);
-      if (old !== this.results) {
-        this._notifyChange();
-      }
+    _results() {
+      return checkAlignment(this.firstValue, this.secondValue);
+    }
+
+    _renderResults() {
       fillValues(this.results.map(toCheck), this.$cells);
     }
+  }
+
+  class TranslationAlignmentChecker extends AlignmentChecker {
+    constructor($results, length) {
+      super($results, length)
+    }
+
+    get length() {
+      return super.length / 3;
+    }
+
+    get colspan() {
+      return 3;
+    }
+
   }
 
   class CodonTranslator extends ResultsDisplay {
@@ -386,12 +433,11 @@ var umi = umi || {};
       return this.result() === this.expected();
     }
 
-    eval() {
-      const old = this.results;
-      this.results = new Sequence(this.value).translations();
-      if (old !== this.results) {
-        this._notifyChange();
-      }
+    _results() {
+      return new Sequence(this.value).translations();
+    }
+
+    _renderResults() {
       fillValues(this.results, this.$cells);
     }
   }
