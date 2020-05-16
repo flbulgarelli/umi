@@ -260,29 +260,33 @@ var umi = umi || {};
     }
 
     _initializeAligmentChecker() {
-      this.alignmentChecker = new AlignmentChecker(findChild(this, '.umi-alignment-results'), this.length);
-      onceAndOnChange(this, () => {
-        evalWithUpdatedValues(this.alignmentChecker, this);
-      });
+      this.alignmentChecker = this._buildDisplay(
+        AlignmentChecker,
+        findChild(this, '.umi-alignment-results'),
+        (display) =>  evalWithUpdatedValues(display, this));
     }
 
     _initializeCodonTranslators() {
-      this.translators = findChild(this, '.umi-alignment-translations').map((index, it) => {
-        const translator = new CodonTranslator($(it), this.length);
-        onceAndOnChange(this, () => {
-          evalWithUpdatedValue(translator, this.rows[index].value());
-        });
-        return translator;
-      });
+      this.translators = findChild(this, '.umi-alignment-translations').map((index, it) =>
+        this._buildDisplay(
+          CodonTranslator,
+          $(it),
+          (display) => evalWithUpdatedValue(display, this.rows[index].value())));
     }
 
     _initializeCodonTranslatorAlignmentChecker() {
       if (this.translators.length) {
-        this.translationAlignmentChecker = new TranslationAlignmentChecker(findChild(this, '.umi-alignment-translation-results'), this.length);
-        onceAndOnChange(this, () => {
-          evalWithUpdatedValues(this.translationAlignmentChecker, this.translations);
-        });
+        this.translationAlignmentChecker = this._buildDisplay(
+          TranslationAlignmentChecker,
+          findChild(this, '.umi-alignment-translation-results'),
+          (display) => evalWithUpdatedValues(display, this.translations))
       }
+    }
+
+    _buildDisplay(f, $, update) {
+      const display = new f($, this.length);
+      onceAndOnChange(this, () => update(display) );
+      return display;
     }
 
     onChange(f) {
