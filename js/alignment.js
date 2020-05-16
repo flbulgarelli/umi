@@ -20,10 +20,7 @@ var umi = umi || {};
   function checkAlignment(x, y) {
     let results = []
     for (let i = 0; i < Math.max(x.length, y.length); i++) {
-      results.push(
-        (x[i] === '-' && y[i] !== '-') ||
-        (x[i] !== '-' && y[i] === '-') ||
-        (x[i] === y[i] && x[i] !== '-'));
+      results.push(x[i] === '-' || y[i] === '-' || x[i] === y[i]);
     }
     return results;
   }
@@ -122,28 +119,32 @@ var umi = umi || {};
       return codons;
     }
 
-    translations() {
-      return this.codons().map(codon => Sequence.TRANSLATIONS[codon] || '-');
+    translations(type) {
+      return this.codons().map(codon => Sequence.TRANSLATIONS[type || 'ADN'][codon] || '-');
     }
   }
 
   Sequence.TRANSLATIONS = {
-      ATA: 'I', ATC: 'I', ATT: 'I', ATG: 'M',
-      ACA: 'T', ACC: 'T', ACG: 'T', ACT: 'T',
-      AAC: 'N', AAT: 'N', AAA: 'K', AAG: 'K',
-      AGC: 'S', AGT: 'S', AGA: 'R', AGG: 'R',
-      CTA: 'L', CTC: 'L', CTG: 'L', CTT: 'L',
-      CCA: 'P', CCC: 'P', CCG: 'P', CCT: 'P',
-      CAC: 'H', CAT: 'H', CAA: 'Q', CAG: 'Q',
-      CGA: 'R', CGC: 'R', CGG: 'R', CGT: 'R',
-      GTA: 'V', GTC: 'V', GTG: 'V', GTT: 'V',
-      GCA: 'A', GCC: 'A', GCG: 'A', GCT: 'A',
-      GAC: 'D', GAT: 'D', GAA: 'E', GAG: 'E',
-      GGA: 'G', GGC: 'G', GGG: 'G', GGT: 'G',
-      TCA: 'S', TCC: 'S', TCG: 'S', TCT: 'S',
-      TTC: 'F', TTT: 'F', TTA: 'L', TTG: 'L',
-      TAC: 'Y', TAT: 'Y', TGG: 'W', TGC: 'C',
-      TGT: 'C', TAA: 'STOP', TAG: 'STOP', TGA: 'STOP'
+    ARN: {
+      UUU:"F", UUC:"F", UUA:"L", UUG:"L", CUU:"L", CUC:"L", CUA:"L", CUG:"L",
+      AUU:"I", AUC:"I", AUA:"I", AUG:"M", GUU:"V", GUC:"V", GUA:"V", GUG:"V",
+      UCU:"S", UCC:"S", UCA:"S", UCG:"S", CCU:"P", CCC:"P", CCA:"P", CCG:"P",
+      ACU:"T", ACC:"T", ACA:"T", ACG:"T", GCU:"A", GCC:"A", GCA:"A", GCG:"A",
+      UAU:"Y", UAC:"Y", UAA:"X", UAG:"X", CAU:"H", CAC:"H", CAA:"Q", CAG:"Q",
+      AAU:"N", AAC:"N", AAA:"K", AAG:"K", GAU:"D", GAC:"D", GAA:"E", GAG:"E",
+      UGU:"C", UGC:"C", UGA:"X", UGG:"W", CGU:"R", CGC:"R", CGA:"R", CGG:"R",
+      AGU:"S", AGC:"S", AGA:"R", AGG:"R", GGU:"G", GGC:"G", GGA:"G", GGG:"G"
+    },
+    ADN: {
+      TTT:"F", TTC:"F", TTA:"L", TTG:"L", CTT:"L", CTC:"L", CTA:"L", CTG:"L",
+      ATT:"I", ATC:"I", ATA:"I", ATG:"M", GTT:"V", GTC:"V", GTA:"V", GTG:"V",
+      TCT:"S", TCC:"S", TCA:"S", TCG:"S", CCT:"P", CCC:"P", CCA:"P", CCG:"P",
+      ACT:"T", ACC:"T", ACA:"T", ACG:"T", GCT:"A", GCC:"A", GCA:"A", GCG:"A",
+      TAT:"Y", TAC:"Y", TAA:"X", TAG:"X", CAT:"H", CAC:"H", CAA:"Q", CAG:"Q",
+      AAT:"N", AAC:"N", AAA:"K", AAG:"K", GAT:"D", GAC:"D", GAA:"E", GAG:"E",
+      TGT:"C", TGC:"C", TGA:"X", TGG:"W", CGT:"R", CGC:"R", CGA:"R", CGG:"R",
+      AGT:"S", AGC:"S", AGA:"R", AGG:"R", GGT:"G", GGC:"G", GGA:"G", GGG:"G"
+    }
   }
 
   // =============
@@ -251,6 +252,7 @@ var umi = umi || {};
       this._initializeRows();
       this._initializeAligmentChecker();
       this._initializeCodonTranslators();
+      this._initializeCodonTranslatorAlignmentChecker();
     }
 
     _initializeRows() {
@@ -259,21 +261,33 @@ var umi = umi || {};
     }
 
     _initializeAligmentChecker() {
-      this.alignmentChecker = new AlignmentChecker(findChild(this, '.umi-alignment-results'), this.length);
-
-      onceAndOnChange(this, () => {
-        evalWithUpdatedValues(this.alignmentChecker, this);
-      });
+      this.alignmentChecker = this._buildDisplay(
+        AlignmentChecker,
+        findChild(this, '.umi-alignment-results'),
+        (display) =>  evalWithUpdatedValues(display, this));
     }
 
     _initializeCodonTranslators() {
-      this.translators = findChild(this, '.umi-alignment-translations').map((index, it) => {
-        const translator = new CodonTranslator($(it), this.length);
-        onceAndOnChange(this, () => {
-          evalWithUpdatedValue(translator, this.rows[index].value());
-        });
-        return translator;
-      });
+      this.translators = findChild(this, '.umi-alignment-translations').map((index, it) =>
+        this._buildDisplay(
+          CodonTranslator,
+          $(it),
+          (display) => evalWithUpdatedValue(display, this.rows[index].value())));
+    }
+
+    _initializeCodonTranslatorAlignmentChecker() {
+      if (this.translators.length) {
+        this.translationAlignmentChecker = this._buildDisplay(
+          TranslationAlignmentChecker,
+          findChild(this, '.umi-alignment-translation-results'),
+          (display) => evalWithUpdatedValues(display, this.translations))
+      }
+    }
+
+    _buildDisplay(f, $, update) {
+      const display = new f($, this.length);
+      onceAndOnChange(this, () => update(display) );
+      return display;
     }
 
     onChange(f) {
@@ -300,6 +314,13 @@ var umi = umi || {};
       return this.rows[1].value();
     }
 
+    get translations() {
+      return {
+        firstValue: () => this.translators[0].result(),
+        secondValue: () => this.translators[1].result()
+      }
+    }
+
     isExpected() {
       return this.rows.every((it) => it.isExpected());
     }
@@ -322,18 +343,35 @@ var umi = umi || {};
     onChange(f) {
       this._listeners.push(f);
     }
+
+    eval() {
+      const old = this.results;
+      this.results = this._results();
+      if (old !== this.results) {
+        this._notifyChange();
+      }
+      this._renderResults();
+    }
   }
 
   class AlignmentChecker extends ResultsDisplay {
-    constructor($results, length) {
+    constructor($results, sequenceLength) {
       super($results);
-      this.length = length;
+      this.sequenceLength = sequenceLength;
       this._initializeResults();
       this._initializeGeneralResults();
     }
 
     _initializeResults() {
-      this.$cells = findOrCreateCells(this, 'umi-alignment-result');
+      this.$cells = findOrCreateCells(this, 'umi-alignment-result', this.colspan);
+    }
+
+    get length() {
+      return this.sequenceLength;
+    }
+
+    get colspan() {
+      return 1;
     }
 
     _initializeGeneralResults() {
@@ -344,14 +382,28 @@ var umi = umi || {};
       return this.results && this.results.every(it => it);
     }
 
-    eval() {
-      const old = this.results;
-      this.results = checkAlignment(this.firstValue, this.secondValue);
-      if (old !== this.results) {
-        this._notifyChange();
-      }
+    _results() {
+      return checkAlignment(this.firstValue, this.secondValue);
+    }
+
+    _renderResults() {
       fillValues(this.results.map(toCheck), this.$cells);
     }
+  }
+
+  class TranslationAlignmentChecker extends AlignmentChecker {
+    constructor($results, length) {
+      super($results, length)
+    }
+
+    get length() {
+      return super.length / 3;
+    }
+
+    get colspan() {
+      return 3;
+    }
+
   }
 
   class CodonTranslator extends ResultsDisplay {
@@ -374,6 +426,10 @@ var umi = umi || {};
       return  this.sequenceLength / 3
     }
 
+    get type() {
+      return this.$.data('translationType');
+    }
+
     expected() {
       return this.$results.data('translationExpected');
     }
@@ -386,12 +442,11 @@ var umi = umi || {};
       return this.result() === this.expected();
     }
 
-    eval() {
-      const old = this.results;
-      this.results = new Sequence(this.value).translations();
-      if (old !== this.results) {
-        this._notifyChange();
-      }
+    _results() {
+      return new Sequence(this.value).translations(this.type);
+    }
+
+    _renderResults() {
       fillValues(this.results, this.$cells);
     }
   }
