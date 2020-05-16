@@ -119,28 +119,32 @@ var umi = umi || {};
       return codons;
     }
 
-    translations() {
-      return this.codons().map(codon => Sequence.TRANSLATIONS[codon] || '-');
+    translations(type) {
+      return this.codons().map(codon => Sequence.TRANSLATIONS[type || 'ADN'][codon] || '-');
     }
   }
 
   Sequence.TRANSLATIONS = {
-      ATA: 'I', ATC: 'I', ATT: 'I', ATG: 'M',
-      ACA: 'T', ACC: 'T', ACG: 'T', ACT: 'T',
-      AAC: 'N', AAT: 'N', AAA: 'K', AAG: 'K',
-      AGC: 'S', AGT: 'S', AGA: 'R', AGG: 'R',
-      CTA: 'L', CTC: 'L', CTG: 'L', CTT: 'L',
-      CCA: 'P', CCC: 'P', CCG: 'P', CCT: 'P',
-      CAC: 'H', CAT: 'H', CAA: 'Q', CAG: 'Q',
-      CGA: 'R', CGC: 'R', CGG: 'R', CGT: 'R',
-      GTA: 'V', GTC: 'V', GTG: 'V', GTT: 'V',
-      GCA: 'A', GCC: 'A', GCG: 'A', GCT: 'A',
-      GAC: 'D', GAT: 'D', GAA: 'E', GAG: 'E',
-      GGA: 'G', GGC: 'G', GGG: 'G', GGT: 'G',
-      TCA: 'S', TCC: 'S', TCG: 'S', TCT: 'S',
-      TTC: 'F', TTT: 'F', TTA: 'L', TTG: 'L',
-      TAC: 'Y', TAT: 'Y', TGG: 'W', TGC: 'C',
-      TGT: 'C', TAA: 'STOP', TAG: 'STOP', TGA: 'STOP'
+    ARN: {
+      UUU:"F", UUC:"F", UUA:"L", UUG:"L", CUU:"L", CUC:"L", CUA:"L", CUG:"L",
+      AUU:"I", AUC:"I", AUA:"I", AUG:"M", GUU:"V", GUC:"V", GUA:"V", GUG:"V",
+      UCU:"S", UCC:"S", UCA:"S", UCG:"S", CCU:"P", CCC:"P", CCA:"P", CCG:"P",
+      ACU:"T", ACC:"T", ACA:"T", ACG:"T", GCU:"A", GCC:"A", GCA:"A", GCG:"A",
+      UAU:"Y", UAC:"Y", UAA:"X", UAG:"X", CAU:"H", CAC:"H", CAA:"Q", CAG:"Q",
+      AAU:"N", AAC:"N", AAA:"K", AAG:"K", GAU:"D", GAC:"D", GAA:"E", GAG:"E",
+      UGU:"C", UGC:"C", UGA:"X", UGG:"W", CGU:"R", CGC:"R", CGA:"R", CGG:"R",
+      AGU:"S", AGC:"S", AGA:"R", AGG:"R", GGU:"G", GGC:"G", GGA:"G", GGG:"G"
+    },
+    ADN: {
+      TTT:"F", TTC:"F", TTA:"L", TTG:"L", CTT:"L", CTC:"L", CTA:"L", CTG:"L",
+      ATT:"I", ATC:"I", ATA:"I", ATG:"M", GTT:"V", GTC:"V", GTA:"V", GTG:"V",
+      TCT:"S", TCC:"S", TCA:"S", TCG:"S", CCT:"P", CCC:"P", CCA:"P", CCG:"P",
+      ACT:"T", ACC:"T", ACA:"T", ACG:"T", GCT:"A", GCC:"A", GCA:"A", GCG:"A",
+      TAT:"Y", TAC:"Y", TAA:"X", TAG:"X", CAT:"H", CAC:"H", CAA:"Q", CAG:"Q",
+      AAT:"N", AAC:"N", AAA:"K", AAG:"K", GAT:"D", GAC:"D", GAA:"E", GAG:"E",
+      TGT:"C", TGC:"C", TGA:"X", TGG:"W", CGT:"R", CGC:"R", CGA:"R", CGG:"R",
+      AGT:"S", AGC:"S", AGA:"R", AGG:"R", GGT:"G", GGC:"G", GGA:"G", GGG:"G"
+    }
   }
 
   // =============
@@ -422,6 +426,10 @@ var umi = umi || {};
       return  this.sequenceLength / 3
     }
 
+    get type() {
+      return this.$.data('translationType');
+    }
+
     expected() {
       return this.$results.data('translationExpected');
     }
@@ -435,7 +443,7 @@ var umi = umi || {};
     }
 
     _results() {
-      return new Sequence(this.value).translations();
+      return new Sequence(this.value).translations(this.type);
     }
 
     _renderResults() {
