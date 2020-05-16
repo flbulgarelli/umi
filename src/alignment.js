@@ -20,10 +20,7 @@ var umi = umi || {};
   function checkAlignment(x, y) {
     let results = []
     for (let i = 0; i < Math.max(x.length, y.length); i++) {
-      results.push(
-        (x[i] === '-' && y[i] !== '-') ||
-        (x[i] !== '-' && y[i] === '-') ||
-        (x[i] === y[i] && x[i] !== '-'));
+      results.push(x[i] === '-' || y[i] === '-' || x[i] === y[i]);
     }
     return results;
   }
