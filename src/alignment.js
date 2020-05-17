@@ -1,3 +1,5 @@
+const {findChild, onceAndOnChange, readData} = require('./combiners');
+
 // =====================
 // Generic Bio functions
 // =====================
@@ -26,15 +28,6 @@ function checkAlignment(x, y) {
 // ============================
 // Generic Components Combiners
 // ============================
-
-function findChild(component, klass) {
-  return component.$.find(klass);
-}
-
-function onceAndOnChange(component, f) {
-  component.onChange(f);
-  f();
-}
 
 function aggregateResult(component, klass, f) {
   let result = findChild(component, klass);
