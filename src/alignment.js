@@ -192,16 +192,16 @@ class AlignmentRow {
       if (initialOrExpected) {
         this._length = initialOrExpected.length;
       } else {
-        this._length = this.$row.data('alignLength');
+        this._length = readData(this, 'alignLength');
       }
     }
     return this._length;
   }
 
   initial() {
-    if (this.$row.data('alignInitial')) {
-      return this.$row.data('alignInitial')
-    } else if (this.$row.data('alignInitialize') !== false) {
+    if (readData(this, 'alignInitial')) {
+      return readData(this, 'alignInitial')
+    } else if (readData(this, 'alignInitialize') !== false) {
       return this.expectedWord();
     } else {
       return ''
@@ -217,7 +217,7 @@ class AlignmentRow {
   }
 
   expected() {
-    return this.$row.data('alignExpected');
+    return readData(this, 'alignExpected');
   }
 
   expectedWord() {
@@ -418,7 +418,7 @@ class CodonTranslator extends ResultsDisplay {
   }
 
   get type() {
-    return this.$.data('translationType');
+    return readData(this, 'translationType');
   }
 
   expected() {
