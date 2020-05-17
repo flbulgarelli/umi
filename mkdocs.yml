@@ -6,4 +6,6 @@ nav:
 repo_url: "https://github.com/flbulgarelli/umi"
 copyright: '© Copyright 2020 Franco Leonardo Bulgarelli & Ana Julia Velez Rueda'
 theme: readthedocs
-docs_dir: tutorial
+docs_dir: tutorials
+extra_css:
+  - css/tutorials.css
