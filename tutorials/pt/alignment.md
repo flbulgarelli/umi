@@ -28,9 +28,9 @@ No entanto, é importante observar que dois genes podem acumular um grande núme
 Conforme explicado acima, a maneira de encontrar relações evolutivas entre duas sequências e avaliar a similaridade entre elas envolve a comparação posição por posição entre elas. Embora as sequências de proteínas e ácidos nucleicos possam ser consideradas como texto ou cadeias de caracteres, o processo de alinhar duas sequências não é tão simples quanto colocar uma sequência em cima da outra e comparar coluna por coluna se houver correspondência entre os resíduos ( ou personagens). Porque? Bem, porque como dissemos antes, ao longo do tempo as sequências podem sofrer mutações, inserções e deleções, e a consideração dessas mudanças não é trivial.
 
 
-Para começar a pensar nas complexidades dessa análise, vamos começar com um exemplo simples de comparação de duas sequências de "linguagem não celular". Suponha que queremos alinhar duas palavrinhas (cadeias de caracteres ou strings): "BANANA" e "MAÇÃ". Se prestarmos atenção a essas duas palavras, podemos notar uma diferença substancial entre elas, o que dificulta nossa análise. Você percebe o que queremos dizer? Exato! Para a diferença de comprimento!
+Para começar a pensar nas complexidades dessa análise, vamos começar com um exemplo simples de comparação de duas sequências de "linguagem não celular". Suponha que queremos alinhar duas palavrinhas (cadeias de caracteres ou strings): "BANANA" e "MANZANA". Se prestarmos atenção a essas duas palavras, podemos notar uma diferença substancial entre elas, o que dificulta nossa análise. Você percebe o que queremos dizer? Exato! Para a diferença de comprimento!
 
-> 👇 DESAFIO I: Vamos tentar, então, alinhar essas duas palavras, para entender melhor o problema. Alinhe as palavras "BANANA" e "APPLE" na tabela de comparação a seguir
+> 👇 DESAFIO I: Vamos tentar, então, alinhar essas duas palavras, para entender melhor o problema. Alinhe as palavras "BANANA" 🍌 e "MANZANA" (🍎 maçã, en espanhol) na tabela de comparação a seguir
 > Tome nota das suas observações e das conclusões que emergem dessas observações!
 
 > ☑️ PERGUNTAS GATILHO: Só existe uma maneira de alinhá-los? Um dos possíveis alinhamentos é melhor que outro? Em caso afirmativo, por quê?
@@ -94,7 +94,7 @@ Agora, como dissemos, o objetivo do alinhamento de sequências é poder inferir 
 
 Definimos a _identidade_ e começamos a entender as implicações da introdução desses hífens, que chamaremos de "lacunas" a partir de agora. A presença de gaps, que introduzem gaps no alinhamento, representam inserções e deleções. E como eles podem intuir, a abertura de uma lacuna em uma posição ou outra ou a persistência de mais de uma lacuna no alinhamento, tem suas implicações.
 
-> 👇 DESAFIO III: Na tabela a seguir, experimente diferentes alinhamentos para as palavras "ANA" e "ANANA". Você verá que na margem superior esquerda existe um valor de identidade calculado para cada alinhamento que você tentar e um botão para alterar a penalidade que é concedida ao referido para o cálculo de _identity_
+> 👇 DESAFIO III: Na tabela a seguir, experimente diferentes alinhamentos para as palavras "ANA" e "ANANA" (🍍 abacaxi, em espanhol). Você verá que na margem superior esquerda existe um valor de identidade calculado para cada alinhamento que você tentar e um botão para alterar a penalidade que é concedida ao referido para o cálculo de _identity_
 > Experimente várias combinações, observe os valores de identidade observados e as conclusões tiradas dessas observações.
 
 > ☑️ PERGUNTAS DESENCADEADORAS: Como os valores de identidade obtidos se relacionam com as penalidades impostas ao gap? Que implicações você acha que uma penalidade de gap mais alta tem? Você consegue pensar em alguma outra forma de penalidade que não tenha sido considerada neste exemplo?
