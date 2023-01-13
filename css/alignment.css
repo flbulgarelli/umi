@@ -58,31 +58,3 @@ table.docutils.umi-alignment-table {
 .umi-alignment-card {
   border-color: #c9c9c9;
 }
-
-/* Tutorials */
-
-.pensar {
-  text-align: center;
-  color: steelblue;
-  font-weight: bold;
-}
-
-.disparadores {
-  text-align: center;
-  color: lightslategray;
-  font-weight: bold;
-}
-
-.reto {
-  text-align: center;
-  color: darkslategray;
-  font-weight: bold;
-}
-
-.informative-text {
-  text-align: justify;
-}
-
-h3 {
-  color: darkslategray;
-}
