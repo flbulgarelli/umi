@@ -1,6 +1,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="../css/alignment.css">
-<script src="../js/umi.js"></script>
+<script src="../../js/umi.js"></script>
 
 ### Una palabra no dice nada y al mismo tiempo lo dice todo
 
@@ -229,7 +229,7 @@ Otra forma de estimar el parecido entre dos secuencias pondera estas implicancia
 Margaret Dayhoff desarrolló las matrices PAM para aminoácidos, que se basan en las secuencias de proteínas que había compilado durante una década, publicadas como el Atlas de secuencia y estructura de proteínas (Dayhoff, 1978).
 En las matrices PAM cada elemento de la matriz Mij cuantifica la probabilidad de que un aminoácido i sea reemplazado por otro aminoácido j en el intervalo evolutivo de 1 PAM (1 PAM se define como el intervalo evolutivo en que cambia un 1% de los aminoácidos en el alineamiento de 2 secuencias).Estas mutaciones se identificaron comparando secuencias muy similares con al menos un 85% de identidad, y se supone que cualquier sustitución observada fue el resultado de una única mutación entre la secuencia ancestral y una de las secuencias actuales. Las matrices de sustitución se utilizan como parámetros de los algoritmos de alineamientos de secuencias proteicas, de forma de poder asignarle una puntuación a cada posible aliniamiento, y de este modo poder elegir el mejor. En el caso de los alineamientos de nucleótidos, suelen utilizarse un sistema de puntuación mucho más simple.
 
-<img src="../static/alignment/pam1.png"></img>
+<img src="../../static/alignment/pam1.png"></img>
 
 <p style='font-size: 12px ; '>Figura extraída del trabajo: <i>A Model of Evolutionary Change in Proteins.</i> Dayhoff, M.O., R.M. Schwartz, and B.C. Orcutt. 1978. Atlas of Protein Sequence and Structure Vol. 5, suppl. 3. National Biomedical Research Foundation, Washington, D.C.</p>
 
@@ -259,4 +259,3 @@ En ambos casos el alineamiento puede ser local o global, lo que supondrá alguna
 <script>
   umi.alignment.start();
 </script>
-
